@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أنظمة التوصية الذكية في التجارة الإلكترونية | مشروع بحثي</title>
+<meta name="description" content="صفحة مرافقة لتقرير بحثي عن استخدام التعلم العميق في أنظمة التوصية بمنصات التجارة الإلكترونية — مقرر Advanced Deep Learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1F3A5F;
+    --ink-deep: #142A44;
+    --paper: #FAF8F4;
+    --paper-warm: #EFE9DF;
+    --copper: #B08D57;
+    --copper-deep: #8A6A3C;
+    --rust: #9C4321;
+    --accent: #0B6E4F;
+    --muted: #6B6863;
+    --line: rgba(31, 58, 95, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--paper);
+    color: var(--ink-deep);
+    font-size: 17px;
+    line-height: 1.85;
+    direction: rtl;
+    overflow-x: hidden;
+  }
+
+  /* Latin numerals & terms use Playfair */
+  .num, .yr { font-family: 'Playfair Display', serif; }
+  .en { font-family: 'Playfair Display', serif; font-style: italic; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(176, 141, 87, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(31, 58, 95, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 48px 32px 64px;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .hero-top .badge {
+    background: var(--rust);
+    color: var(--paper);
+    padding: 6px 14px;
+    border-radius: 2px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+  }
+
+  .hero-center {
+    max-width: 940px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 60px 0;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Amiri', serif;
+    font-style: italic;
+    color: var(--copper-deep);
+    font-size: 22px;
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+  }
+
+  .hero h1 {
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 900;
+    font-size: clamp(38px, 6vw, 72px);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 28px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 .accent {
+    color: var(--rust);
+    font-style: normal;
+    position: relative;
+  }
+
+  .hero h1 .accent::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    right: 0;
+    left: 0;
+    height: 10px;
+    background: rgba(176, 141, 87, 0.30);
+    z-index: -1;
+  }
+
+  .hero-subtitle {
+    font-size: 22px;
+    color: var(--muted);
+    max-width: 720px;
+    margin: 0 auto;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .hero-supervisor {
+    margin: 32px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    max-width: 540px;
+    font-size: 15px;
+    color: var(--copper-deep);
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .hero-bottom {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+
+  .stat { text-align: right; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 54px;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .stat-num .unit { font-size: 22px; color: var(--copper-deep); margin-right: 6px; }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+  }
+
+  /* ============ NAV ============ */
+  .nav {
+    position: sticky;
+    top: 0;
+    background: rgba(250, 248, 244, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 100;
+    border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .nav-logo { font-weight: 700; color: var(--ink); font-size: 15px; }
+  .nav-logo .en { color: var(--rust); }
+
+  .nav-links { display: flex; gap: 26px; list-style: none; flex-wrap: wrap; }
+
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background: var(--rust);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--rust); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:focus-visible { outline: 2px solid var(--rust); outline-offset: 4px; }
+
+  /* ============ SECTIONS ============ */
+  section { padding: 100px 0; position: relative; }
+
+  .section-eyebrow {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--copper-deep);
+    font-size: 18px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+  .section-eyebrow .ch {
+    font-family: 'Playfair Display', serif;
+    color: var(--rust);
+    font-weight: 900;
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .section-title {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .section-intro {
+    font-size: 19px;
+    color: var(--muted);
+    max-width: 820px;
+    line-height: 1.8;
+    margin-bottom: 64px;
+  }
+
+  /* ============ INTRO ============ */
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .intro-grid p { margin-bottom: 18px; }
+  .intro-grid p strong { color: var(--ink); font-weight: 700; }
+
+  .pull-quote {
+    background: var(--paper-warm);
+    border-right: 4px solid var(--rust);
+    padding: 32px 36px;
+    margin: 8px 0;
+    font-family: 'Amiri', serif;
+    font-size: 22px;
+    line-height: 1.7;
+    color: var(--ink);
+    font-style: italic;
+    position: relative;
+  }
+
+  .pull-quote::before {
+    content: '\201D';
+    position: absolute;
+    top: -10px;
+    right: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    color: var(--copper);
+    opacity: 0.4;
+    line-height: 1;
+  }
+
+  .pull-quote cite {
+    display: block;
+    margin-top: 16px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ============ MODELS ============ */
+  .models-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  .model-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 36px 32px;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .model-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 0; height: 100%;
+    background: var(--ink);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .model-card:hover::before { width: 100%; }
+  .model-card:hover { color: var(--paper); border-color: var(--ink); }
+  .model-card:hover .model-num,
+  .model-card:hover .model-name,
+  .model-card:hover .model-name-ar,
+  .model-card:hover .model-desc,
+  .model-card:hover .model-eg { color: var(--paper); }
+  .model-card:hover .model-eg { border-color: rgba(250, 248, 244, 0.2); }
+  .model-card:hover .model-tag { background: var(--copper); color: var(--paper); }
+
+  .model-card > * { position: relative; z-index: 1; }
+
+  .model-num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--copper-deep);
+    margin-bottom: 16px;
+    transition: color 0.3s;
+  }
+
+  .model-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.2;
+    transition: color 0.3s;
+  }
+
+  .model-name-ar { font-size: 15px; color: var(--muted); margin-bottom: 20px; transition: color 0.3s; }
+
+  .model-tag {
+    display: inline-block;
+    background: var(--paper-warm);
+    color: var(--ink);
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin-bottom: 18px;
+    transition: all 0.3s;
+  }
+
+  .model-desc { font-size: 15px; line-height: 1.7; color: var(--ink-deep); margin-bottom: 20px; transition: color 0.3s; }
+
+  .model-eg {
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    transition: all 0.3s;
+  }
+
+  .model-eg strong { color: var(--rust); font-weight: 700; }
+
+  /* ============ COMPANIES ============ */
+  .companies { background: var(--paper-warm); margin: 0 -32px; padding: 100px 32px; }
+  .companies .container { max-width: 1200px; }
+
+  .company-row {
+    display: grid;
+    grid-template-columns: 100px 220px 1fr 150px;
+    gap: 32px;
+    align-items: center;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--line);
+    transition: padding 0.3s;
+  }
+
+  .company-row:hover { padding-right: 16px; }
+  .company-row:last-child { border-bottom: none; }
+
+  .company-rank {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--copper);
+    line-height: 1;
+    opacity: 0.6;
+  }
+
+  .company-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  .company-origin { font-size: 13px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .company-desc { font-size: 15px; line-height: 1.7; color: var(--ink-deep); }
+  .company-desc strong { color: var(--rust); font-weight: 700; }
+
+  .company-stat { text-align: left; padding-right: 24px; border-right: 2px solid var(--rust); }
+
+  .company-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 30px;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .company-stat-label { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  /* ============ TIMELINE ============ */
+  .timeline-wrap { position: relative; margin-top: 80px; }
+
+  .tl-toggle {
+    display: flex;
+    gap: 0;
+    margin: 0 auto 60px;
+    border: 1px solid var(--ink);
+    width: fit-content;
+  }
+
+  .tl-btn {
+    background: var(--paper);
+    color: var(--ink);
+    border: none;
+    padding: 12px 28px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .tl-btn.active { background: var(--ink); color: var(--paper); }
+  .tl-btn:not(.active):hover { background: var(--paper-warm); }
+  .tl-btn:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
+
+  .timeline { position: relative; padding: 20px 0; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    right: 50%;
+    width: 2px;
+    background: var(--line);
+    transform: translateX(50%);
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    gap: 32px;
+    margin-bottom: 56px;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s forwards;
+  }
+
+  .tl-item:nth-child(odd)  { animation-delay: 0.1s; }
+  .tl-item:nth-child(even) { animation-delay: 0.2s; }
+
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  .tl-year {
+    grid-column: 2;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 21px;
+    text-align: center;
+    color: var(--paper);
+    background: var(--ink);
+    width: 80px; height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    line-height: 1;
+  }
+
+  .tl-year.saudi { background: var(--rust); }
+  .tl-year.future { background: var(--paper); color: var(--rust); border: 2px dashed var(--rust); }
+
+  .tl-card { background: var(--paper); border: 1px solid var(--line); padding: 24px 28px; position: relative; }
+  .tl-item.right .tl-card { grid-column: 1; }
+  .tl-item.left .tl-card  { grid-column: 3; }
+
+  .tl-card::after { content: ''; position: absolute; top: 50%; width: 16px; height: 1px; background: var(--line); }
+  .tl-item.right .tl-card::after { right: -16px; }
+  .tl-item.left .tl-card::after  { left: -16px; }
+
+  .tl-card-flag {
+    display: inline-block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+    padding: 3px 10px;
+    font-weight: 600;
+  }
+
+  .tl-card-flag.global { background: var(--ink); color: var(--paper); }
+  .tl-card-flag.saudi  { background: var(--rust); color: var(--paper); }
+
+  .tl-card h4 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--ink); margin-bottom: 8px; line-height: 1.2; }
+  .tl-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .tl-card .tl-model { margin-top: 12px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 13px; color: var(--copper-deep); }
+
+  /* ============ CHALLENGES ============ */
+  .challenges-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 40px; }
+  .challenge { border-top: 4px solid var(--rust); padding-top: 20px; }
+  .challenge .ch-num { font-family: 'Playfair Display', serif; font-style: italic; color: var(--copper-deep); font-size: 14px; margin-bottom: 12px; }
+  .challenge h4 { font-size: 21px; font-weight: 700; color: var(--ink); margin-bottom: 12px; line-height: 1.3; }
+  .challenge p { font-size: 15px; line-height: 1.7; color: var(--ink-deep); }
+
+  /* ============ FUTURE ============ */
+  .future { background: var(--ink); color: var(--paper); margin: 0 -32px; padding: 120px 32px; position: relative; overflow: hidden; }
+
+  .future::before {
+    content: '2031';
+    position: absolute;
+    top: 50%; left: -50px;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 440px;
+    line-height: 1;
+    color: rgba(250, 248, 244, 0.04);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .future .container { position: relative; z-index: 1; }
+  .future .section-eyebrow { color: var(--copper); }
+  .future .section-eyebrow .ch { color: var(--copper); }
+  .future .section-eyebrow::after { background: rgba(250, 248, 244, 0.15); }
+  .future .section-title { color: var(--paper); }
+  .future .section-intro { color: rgba(250, 248, 244, 0.7); }
+
+  .future-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
+  .future-item { border-top: 2px solid var(--copper); padding-top: 24px; }
+  .future-item h4 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; color: var(--paper); line-height: 1.2; }
+  .future-item p { font-size: 15px; line-height: 1.7; color: rgba(250, 248, 244, 0.8); }
+
+  /* ============ FOOTER ============ */
+  footer { background: var(--ink-deep); color: var(--paper); padding: 60px 32px 40px; }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+  }
+
+  .footer-about h5, .footer-col h5 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 16px; color: var(--copper); }
+  .footer-about p { font-size: 14px; line-height: 1.7; color: rgba(250, 248, 244, 0.7); }
+  .footer-col ul { list-style: none; padding: 0; }
+  .footer-col li { font-size: 14px; margin-bottom: 8px; color: rgba(250, 248, 244, 0.7); }
+  .footer-col a { color: rgba(250, 248, 244, 0.7); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--copper); }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(250, 248, 244, 0.1);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(250, 248, 244, 0.5);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .hero-bottom { grid-template-columns: repeat(2, 1fr); }
+    .intro-grid { grid-template-columns: 1fr; gap: 32px; }
+    .models-grid { grid-template-columns: 1fr; }
+    .company-row { grid-template-columns: 60px 1fr; gap: 16px; }
+    .company-desc, .company-stat { grid-column: 1 / -1; }
+    .company-stat { border-right: none; padding-right: 0; text-align: right; }
+    .timeline::before { right: 32px; }
+    .tl-item { grid-template-columns: 64px 1fr; }
+    .tl-year { grid-column: 1; width: 64px; height: 64px; font-size: 17px; }
+    .tl-item.right .tl-card, .tl-item.left .tl-card { grid-column: 2; }
+    .tl-item.right .tl-card::after, .tl-item.left .tl-card::after { right: -16px; left: auto; }
+    .future-grid, .challenges-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .future::before { font-size: 220px; }
+  }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<h1 class="sr-only">أنظمة التوصية الذكية في التجارة الإلكترونية — مشروع بحثي في مقرر Advanced Deep Learning</h1>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-top">
+    <span>Advanced Deep Learning · <span class="num">1447</span> AH</span>
+    <span class="badge">مشروع بحثي</span>
+  </div>
+
+  <div class="hero-center">
+    <div class="hero-eyebrow">A research case study in</div>
+    <h1>أنظمة <span class="accent">التوصية</span> الذكية<br>في التجارة الإلكترونية</h1>
+    <p class="hero-subtitle">كيف يُعيد التعلم العميق (<span class="en">Deep Learning</span>) تشكيل ما نراه ونشتريه على منصات <span class="en">Amazon</span> و<span class="en">Alibaba</span> و<span class="en">noon</span> — من خوارزميات الترشيح إلى مساعدي التسوّق التوليديين.</p>
+    <p class="hero-supervisor">تحت إشراف د. أحمد بن حسن الهندي · خبير الذكاء الاصطناعي</p>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="stat">
+      <div class="stat-num"><span class="num">35</span><span class="unit">%</span></div>
+      <div class="stat-label">من مبيعات Amazon مصدرها التوصية</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num"><span class="num">75</span><span class="unit">%</span></div>
+      <div class="stat-label">من مشاهدات Netflix تقودها التوصية</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num"><span class="num">60</span><span class="unit">%</span></div>
+      <div class="stat-label">زيادة احتمال إتمام الشراء مع Rufus</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num"><span class="unit">$</span><span class="num">55</span><span class="unit">B</span></div>
+      <div class="stat-label">حجم السوق السعودي المتوقع بحلول 2031</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo"><span class="en">AI</span> × التجارة الإلكترونية</span>
+    <ul class="nav-links">
+      <li><a href="#intro">المقدمة</a></li>
+      <li><a href="#models">النماذج</a></li>
+      <li><a href="#companies">الشركات</a></li>
+      <li><a href="#timeline">الخط الزمني</a></li>
+      <li><a href="#challenges">التحديات</a></li>
+      <li><a href="#future">المستقبل</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ INTRO ============ -->
+<section id="intro">
+  <div class="container">
+    <div class="section-eyebrow"><span class="ch num">1</span><span>المقدمة</span></div>
+    <h2 class="section-title">المحرّك الخفي<br>وراء كل عملية شراء</h2>
+    <p class="section-intro">خلف كل صفحة منتج وكل قائمة «قد يعجبك أيضاً» يعمل نظام توصية (<span class="en">Recommendation System</span>) صار العمود الفقري التجاري لمنصات التجارة الإلكترونية الكبرى، لا مجرد ميزة إضافية.</p>
+
+    <div class="intro-grid">
+      <div>
+        <p>تحوّلت أنظمة التوصية من قواعد بسيطة وترشيح تعاوني (<span class="en">Collaborative Filtering</span>) إلى شبكات تعلّم عميق تتنبّأ باهتمام المستخدم لحظةً بلحظة. تشير تقديرات <strong>McKinsey</strong> إلى أن نحو <span class="num">35</span>٪ من مشتريات <span class="en">Amazon</span> تنشأ من التوصيات، وأن المحرّك ذاته يقف خلف قرابة <span class="num">75</span>٪ من ساعات المشاهدة على <span class="en">Netflix</span>.</p>
+        <p>يتتبّع هذا التقرير تطوّر هذه الأنظمة عبر ثلاث عائلات من النماذج، وثلاث شركات تقود الميدان عالمياً، ثم يربطها بالسوق السعودي الصاعد في ظل <strong>رؤية 2030</strong>.</p>
+      </div>
+      <div>
+        <blockquote class="pull-quote">
+          نظام التوصية الجيّد لا يجيب عن سؤال «ماذا يوجد لدينا؟»، بل عن سؤال أصعب: «ما الذي يريده هذا المستخدم تحديداً، الآن؟».
+          <cite>— الفكرة المحورية للتقرير</cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODELS ============ -->
+<section id="models" style="background: var(--paper-warm); margin: 0 -32px; padding: 100px 32px;">
+  <div class="container">
+    <div class="section-eyebrow"><span class="ch num">2</span><span>النماذج التقنية</span></div>
+    <h2 class="section-title">ثلاث عائلات من النماذج<br>تُحرّك التوصية الحديثة</h2>
+    <p class="section-intro">اختار التقرير ثلاث عائلات تمثّل ثلاثة أنماط مختلفة لفهم المستخدم: التسلسل الزمني، العلاقات الشبكية، واللغة الطبيعية.</p>
+
+    <div class="models-grid">
+      <article class="model-card">
+        <div class="model-num">Family 01</div>
+        <h3 class="model-name">Sequential Models</h3>
+        <div class="model-name-ar">نماذج التسلسل (SASRec · BERT4Rec)</div>
+        <span class="model-tag">Predictive AI</span>
+        <p class="model-desc">تنظر إلى سلوك المستخدم كسلسلة زمنية من النقرات والمشتريات، وتستخدم آلية الانتباه الذاتي (<span class="en">Self-Attention</span>) للتنبؤ بالعنصر التالي. <span class="en">SASRec</span> أحادي الاتجاه، بينما <span class="en">BERT4Rec</span> ثنائي الاتجاه عبر إخفاء العناصر.</p>
+        <div class="model-eg"><strong>أساس علمي:</strong> SASRec (arXiv 1808.09781) و BERT4Rec (arXiv 1904.06690) — الأخير حقّق تحسناً يتجاوز 7٪ في HR@10.</div>
+      </article>
+
+      <article class="model-card">
+        <div class="model-num">Family 02</div>
+        <h3 class="model-name">Graph Neural Networks</h3>
+        <div class="model-name-ar">الشبكات العصبية للرسوم البيانية (GNN)</div>
+        <span class="model-tag">Predictive AI</span>
+        <p class="model-desc">تمثّل المستخدمين والمنتجات كعُقد في رسم بياني ضخم، وتتعلّم من العلاقات بينها. <span class="en">PinSage</span> من <span class="en">Pinterest</span> هو التطبيق الصناعي الأبرز، عاملاً على رسم بياني بمليارات العُقد.</p>
+        <div class="model-eg"><strong>أساس علمي:</strong> PinSage (arXiv 1806.01973) — يعمل على 3 مليار عقدة و18 مليار حافة، بُني فوق GraphSAGE.</div>
+      </article>
+
+      <article class="model-card">
+        <div class="model-num">Family 03</div>
+        <h3 class="model-name">LLMs &amp; Generative</h3>
+        <div class="model-name-ar">النماذج اللغوية والتوليدية (RAG · Rufus)</div>
+        <span class="model-tag">Generative AI</span>
+        <p class="model-desc">تنقل التوصية من قوائم جامدة إلى حوار طبيعي. تجمع بين الاسترجاع والتوليد (<span class="en">RAG</span>) لتقديم اقتراحات مُفسَّرة، وهي البنية التي يقوم عليها مساعد التسوّق <span class="en">Rufus</span> من <span class="en">Amazon</span>.</p>
+        <div class="model-eg"><strong>أساس علمي:</strong> RAG (arXiv 2005.11401) — يربط نموذجاً لغوياً بقاعدة معرفة خارجية لتقليل الهلوسة وتحديث المعلومة.</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPANIES ============ -->
+<section id="companies" class="companies">
+  <div class="container">
+    <div class="section-eyebrow"><span class="ch num">3</span><span>حالات دراسية</span></div>
+    <h2 class="section-title">من يبني هذا المجال<br>في العالم اليوم</h2>
+    <p class="section-intro">ثلاث منصات تمثّل ثلاثة مسارات مختلفة: التوليد المحادث، نمذجة الاهتمام، والرسوم البيانية على نطاق المليارات.</p>
+
+    <div class="company-row">
+      <div class="company-rank num">01</div>
+      <div>
+        <div class="company-name">Amazon</div>
+        <div class="company-origin">USA</div>
+      </div>
+      <div class="company-desc">أطلقت عام <span class="num">2024</span> مساعد التسوّق <strong>Rufus</strong> ببنية نموذج لغوي مخصّص على <span class="en">Amazon Bedrock</span>، يدمج <span class="en">RAG</span> والتعلّم المعزّز. التوصيات تقف خلف نحو <strong>35٪</strong> من مبيعات المنصة.</div>
+      <div class="company-stat">
+        <div class="company-stat-num">+<span class="num">60</span>%</div>
+        <div class="company-stat-label">أكثر ميلاً لإتمام الشراء عند استخدام Rufus</div>
+      </div>
+    </div>
+
+    <div class="company-row">
+      <div class="company-rank num">02</div>
+      <div>
+        <div class="company-name">Alibaba</div>
+        <div class="company-origin">China · Taobao</div>
+      </div>
+      <div class="company-desc">رائدة في نمذجة اهتمام المستخدم عبر <strong>DIN</strong> ثم <strong>DIEN</strong>، باستخدام وحدة تفعيل محلية (<span class="en">Local Activation Unit</span>) تلتقط الاهتمامات المتغيّرة، مُدرَّبة على أكثر من ملياري عيّنة.</div>
+      <div class="company-stat">
+        <div class="company-stat-num">+<span class="num">20.7</span>%</div>
+        <div class="company-stat-label">تحسّن في CTR بنموذج DIEN على Taobao</div>
+      </div>
+    </div>
+
+    <div class="company-row">
+      <div class="company-rank num">03</div>
+      <div>
+        <div class="company-name">Pinterest</div>
+        <div class="company-origin">USA</div>
+      </div>
+      <div class="company-desc">طوّرت <strong>PinSage</strong>، أول تطبيق صناعي للشبكات العصبية للرسوم البيانية على نطاق الويب، مُدرَّباً على <span class="num">7.5</span> مليار مثال لتقديم توصيات بصرية في ميزة <span class="en">Shop the Look</span>.</div>
+      <div class="company-stat">
+        <div class="company-stat-num">+<span class="num">25</span>%</div>
+        <div class="company-stat-label">زيادة في مرّات الظهور (impressions)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section id="timeline">
+  <div class="container">
+    <div class="section-eyebrow"><span class="ch num">4</span><span>الخط الزمني</span></div>
+    <h2 class="section-title">مسارٌ عالميٌّ<br>وآخر سعوديٌّ يتقاطعان</h2>
+    <p class="section-intro">تطوّر التعلم العميق في أنظمة التوصية عالمياً يسير بالتوازي مع نضج سوق التجارة الإلكترونية في المملكة. اضغط الأزرار لاستعراض المسارَين أو أحدهما.</p>
+
+    <div class="timeline-wrap">
+      <div class="tl-toggle" role="tablist" aria-label="تصفية الخط الزمني">
+        <button class="tl-btn active" data-filter="all" aria-pressed="true">الكل</button>
+        <button class="tl-btn" data-filter="global" aria-pressed="false">عالمي</button>
+        <button class="tl-btn" data-filter="saudi" aria-pressed="false">سعودي</button>
+      </div>
+
+      <div class="timeline" id="timeline">
+
+        <div class="tl-item right" data-track="global">
+          <div class="tl-year global yr">2016</div>
+          <div class="tl-card">
+            <span class="tl-card-flag global">Global</span>
+            <h4>Wide &amp; Deep</h4>
+            <p>تقدّم Google نموذجاً يجمع بين الحفظ والتعميم في بنية واحدة، فيرسي أساس التوصية بالتعلم العميق على نطاق صناعي.</p>
+            <div class="tl-model">arXiv 1606.07792 · Google Play</div>
+          </div>
+        </div>
+
+        <div class="tl-item left" data-track="saudi">
+          <div class="tl-year saudi yr">2017</div>
+          <div class="tl-card">
+            <span class="tl-card-flag saudi">Saudi</span>
+            <h4>استحواذ Amazon على Souq</h4>
+            <p>دخول عملاق التوصية العالمي إلى السوق الإقليمي، ونقل خبرات التخصيص (<span class="en">Personalization</span>) إلى المستهلك العربي.</p>
+            <div class="tl-model">بداية تحوّل السوق</div>
+          </div>
+        </div>
+
+        <div class="tl-item right" data-track="global">
+          <div class="tl-year global yr">2018</div>
+          <div class="tl-card">
+            <span class="tl-card-flag global">Global</span>
+            <h4>DIN · PinSage · SASRec</h4>
+            <p>عام انطلاقة الانتباه والرسوم البيانية: Alibaba تطلق DIN، وPinterest تطلق PinSage، ويظهر SASRec لنمذجة التسلسل.</p>
+            <div class="tl-model">Attention &amp; Graphs</div>
+          </div>
+        </div>
+
+        <div class="tl-item left" data-track="global">
+          <div class="tl-year global yr">2019</div>
+          <div class="tl-card">
+            <span class="tl-card-flag global">Global</span>
+            <h4>BERT4Rec · BST · DLRM</h4>
+            <p>نماذج ثنائية الاتجاه (BERT4Rec) وبنى صناعية ضخمة للتوصية مثل DLRM من Meta وBST من Alibaba.</p>
+            <div class="tl-model">Bidirectional &amp; Scale</div>
+          </div>
+        </div>
+
+        <div class="tl-item right" data-track="global">
+          <div class="tl-year global yr">2020</div>
+          <div class="tl-card">
+            <span class="tl-card-flag global">Global</span>
+            <h4>RAG</h4>
+            <p>ورقة Lewis et al. تجمع الاسترجاع بالتوليد، فتفتح الباب لاحقاً أمام التوصية المُفسَّرة والمساعدين المحادثين.</p>
+            <div class="tl-model">arXiv 2005.11401</div>
+          </div>
+        </div>
+
+        <div class="tl-item left" data-track="saudi">
+          <div class="tl-year saudi yr">2021</div>
+          <div class="tl-card">
+            <span class="tl-card-flag saudi">Saudi</span>
+            <h4>noon تُوسّع بنيتها بالرياض</h4>
+            <p>افتتاح منشأة لوجستية بمساحة 45,000 م²، تمكّن التوصية الفورية والتوصيل السريع في قلب السوق السعودي.</p>
+            <div class="tl-model">بنية تحتية للتخصيص</div>
+          </div>
+        </div>
+
+        <div class="tl-item right" data-track="global">
+          <div class="tl-year global yr">2024</div>
+          <div class="tl-card">
+            <span class="tl-card-flag global">Global</span>
+            <h4>Amazon Rufus</h4>
+            <p>أول مساعد تسوّق بنموذج لغوي على نطاق واسع، يدمج RAG والتعلّم المعزّز على بنية AWS، ويفهم اللغة الطبيعية.</p>
+            <div class="tl-model">Generative Shopping</div>
+          </div>
+        </div>
+
+        <div class="tl-item left" data-track="saudi">
+          <div class="tl-year saudi yr">2025</div>
+          <div class="tl-card">
+            <span class="tl-card-flag saudi">Saudi</span>
+            <h4>السوق يبلغ نحو <span class="en">$28B</span></h4>
+            <p>تجارة إلكترونية بنفاذ إنترنت 99٪ وتغطية 5G تناهز 78٪، يقودها Amazon.sa وnoon وSalla وZid.</p>
+            <div class="tl-model">~12% نمو سنوي</div>
+          </div>
+        </div>
+
+        <div class="tl-item right" data-track="global">
+          <div class="tl-year global yr">2025</div>
+          <div class="tl-card">
+            <span class="tl-card-flag global">Global</span>
+            <h4>التجارة الوكيلة</h4>
+            <p>ظهور ميزات مثل «Help Me Decide» ووكلاء يتّخذون قرار الشراء نيابةً عن المستخدم — أفق التوصية القادم.</p>
+            <div class="tl-model">Agentic Commerce</div>
+          </div>
+        </div>
+
+        <div class="tl-item left" data-track="saudi">
+          <div class="tl-year saudi future yr">2031</div>
+          <div class="tl-card" style="border: 2px dashed var(--rust); background: rgba(156, 67, 33, 0.03);">
+            <span class="tl-card-flag saudi">Saudi · توقّع</span>
+            <h4>نحو <span class="en">$55B</span></h4>
+            <p>تقديرات Mordor Intelligence تضاعف حجم السوق تقريباً مقارنةً بـ2025 — فرصة بحثية وتجارية للمختصين المحليين.</p>
+            <div class="tl-model">~2× نمو متوقّع</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHALLENGES ============ -->
+<section id="challenges">
+  <div class="container">
+    <div class="section-eyebrow"><span class="ch num">5</span><span>التحديات</span></div>
+    <h2 class="section-title">ما لا تُظهره<br>قائمة «قد يعجبك أيضاً»</h2>
+    <p class="section-intro">خلف دقّة التوصية تقف تحدّيات تقنية وأخلاقية وتنظيمية، تكشفها الأوراق العلمية أكثر مما يكشفها التسويق.</p>
+
+    <div class="challenges-grid">
+      <div class="challenge">
+        <div class="ch-num en">Challenge · 01</div>
+        <h4>البداية الباردة وشُح البيانات</h4>
+        <p>المستخدم الجديد بلا تاريخ شرائي، والمنتج الجديد بلا تفاعلات — مشكلة <span class="en">Cold Start</span> وتناثر البيانات (<span class="en">Data Sparsity</span>) تبقى التحدّي الجوهري لأي نظام توصية.</p>
+      </div>
+
+      <div class="challenge">
+        <div class="ch-num en">Challenge · 02</div>
+        <h4>فقاعة الترشيح والانحياز</h4>
+        <p>انحياز الشهرة (<span class="en">Popularity Bias</span>) يضخّم الرائج ويهمّش الذيل الطويل، فيما تحبس فقاعة الترشيح (<span class="en">Filter Bubble</span>) المستخدم في اهتماماته السابقة، مع مخاطر الأنماط المظلمة (<span class="en">Dark Patterns</span>).</p>
+      </div>
+
+      <div class="challenge">
+        <div class="ch-num en">Challenge · 03</div>
+        <h4>قابلية التفسير والتنظيم</h4>
+        <p>لماذا اقتُرح هذا المنتج تحديداً؟ سؤال تتسارع التشريعات للإجابة عنه: <span class="en">GDPR</span> وحقّ التفسير، و<span class="en">EU AI Act</span> منذ <span class="num">2024</span>، ونظام حماية البيانات السعودي <span class="en">PDPL</span>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FUTURE ============ -->
+<section id="future" class="future">
+  <div class="container">
+    <div class="section-eyebrow"><span class="ch num">6</span><span>المستقبل</span></div>
+    <h2 class="section-title">ثلاثة تحوّلات قادمة<br>خلال خمس سنوات</h2>
+    <p class="section-intro">تتّجه التوصية بحلول <span class="num">2031</span> نحو تحوّلات جوهرية، أبرزها — للمختصّ السعودي تحديداً — تحوّل المملكة إلى سوقٍ صاعدٍ ومختبرٍ إقليميٍّ للتطبيق.</p>
+
+    <div class="future-grid">
+      <div class="future-item">
+        <h4>Agentic Commerce</h4>
+        <p>الانتقال من نظام يقترح إلى وكيلٍ مستقلّ ينفّذ: يقارن، يختار، ويُتمّ الشراء نيابةً عن المستخدم ضمن حدود يضعها بنفسه.</p>
+      </div>
+
+      <div class="future-item">
+        <h4>Generative &amp; Conversational</h4>
+        <p>من قوائم المنتجات الجامدة إلى حوارٍ طبيعيٍّ يولّد الخيارات ويفسّرها، على نهج Rufus والتوصية التوليدية (<span class="en">Generative Recommendation</span>).</p>
+      </div>
+
+      <div class="future-item">
+        <h4>السعودية كسوق صاعد</h4>
+        <p>مع رؤية <span class="num">2030</span> ومنصّات مثل noon وSalla وZid، تتّسع الفجوة بين الطلب المحلي والبحث المتخصّص — فرصة استثنائية للباحثين والمطوّرين السعوديين.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-about">
+      <h5>About this page</h5>
+      <p>صفحة مرافقة لتقرير بحثي في مقرر <span class="en">Advanced Deep Learning</span> حول استخدام التعلم العميق في أنظمة التوصية بالتجارة الإلكترونية. مصمّمة بمساعدة أدوات الذكاء الاصطناعي ومنشورة على <span class="en">GitHub Pages</span>. كل الإحصاءات والشركات المذكورة موثّقة من مصادر علمية وصناعية حقيقية.</p>
+    </div>
+
+    <div class="footer-col">
+      <h5>Sources</h5>
+      <ul>
+        <li>arXiv 1706.06978 — DIN</li>
+        <li>arXiv 1806.01973 — PinSage</li>
+        <li>arXiv 1808.09781 — SASRec</li>
+        <li>arXiv 1904.06690 — BERT4Rec</li>
+        <li>McKinsey · Mordor Intelligence</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Companies cited</h5>
+      <ul>
+        <li><a href="https://www.amazon.com" target="_blank" rel="noopener">Amazon — Rufus</a></li>
+        <li><a href="https://www.alibaba.com" target="_blank" rel="noopener">Alibaba — Taobao</a></li>
+        <li><a href="https://www.pinterest.com" target="_blank" rel="noopener">Pinterest — PinSage</a></li>
+        <li><a href="https://www.noon.com" target="_blank" rel="noopener">noon — السعودية</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>خالد حسن سعيد الحربي · <span class="en">Advanced Deep Learning · 1447 AH</span></span>
+    <span class="en">Built with Claude · Hosted on GitHub Pages</span>
+  </div>
+</footer>
+
+<script>
+  // Timeline filter
+  const buttons = document.querySelectorAll('.tl-btn');
+  const items = document.querySelectorAll('.tl-item');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+      const filter = btn.dataset.filter;
+      items.forEach(item => {
+        item.style.display = (filter === 'all' || item.dataset.track === filter) ? '' : 'none';
+      });
+    });
+  });
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        const offset = target.offsetTop - 80;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
