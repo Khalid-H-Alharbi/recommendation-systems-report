@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أنظمة التوصية الذكية في التجارة الإلكترونية | مشروع بحثي</title>
+<meta name="description" content="صفحة تفاعلية مرافقة لتقرير بحثي عن استخدام التعلم العميق في أنظمة التوصية بمنصات التجارة الإلكترونية — مقرر Advanced Deep Learning. تتضمّن محرّك توصية تفاعلي حيّ.">
+<meta property="og:title" content="أنظمة التوصية الذكية في التجارة الإلكترونية">
+<meta property="og:description" content="صفحة تفاعلية: جرّب محرّك توصية حيّ، واستكشف النماذج والشركات والخط الزمني.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1F3A5F;
+    --ink-deep: #142A44;
+    --paper: #FAF8F4;
+    --paper-warm: #EFE9DF;
+    --copper: #B08D57;
+    --copper-deep: #8A6A3C;
+    --rust: #9C4321;
+    --accent: #0B6E4F;
+    --muted: #6B6863;
+    --line: rgba(31, 58, 95, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--paper);
+    color: var(--ink-deep);
+    font-size: 17px;
+    line-height: 1.85;
+    direction: rtl;
+    overflow-x: hidden;
+  }
+
+  .num, .yr { font-family: 'Playfair Display', serif; }
+  .en { font-family: 'Playfair Display', serif; font-style: italic; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(176, 141, 87, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(31, 58, 95, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== READING PROGRESS BAR ===== */
+  .progress-bar {
+    position: fixed;
+    top: 0; right: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--rust), var(--copper));
+    z-index: 300;
+    transition: width 0.1s linear;
+  }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2,0.7,0.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 96vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 48px 32px 64px;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .hero > .hero-aura {
+    position: absolute;
+    width: 720px; height: 720px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(176,141,87,0.10), transparent 62%);
+    top: 30%; right: -160px;
+    pointer-events: none;
+    z-index: 0;
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes drift { to { transform: translate(-40px, 40px) scale(1.08); } }
+
+  .hero > * { position: relative; z-index: 1; }
+
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .hero-top .badge {
+    background: var(--rust);
+    color: var(--paper);
+    padding: 6px 14px;
+    border-radius: 2px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+  }
+
+  .hero-center { max-width: 960px; margin: 0 auto; text-align: center; padding: 56px 0; }
+
+  .hero-eyebrow {
+    font-family: 'Amiri', serif;
+    font-style: italic;
+    color: var(--copper-deep);
+    font-size: 22px;
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+  }
+
+  .hero h1 {
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 900;
+    font-size: clamp(38px, 6vw, 72px);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 28px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 .accent { color: var(--rust); font-style: normal; position: relative; }
+  .hero h1 .accent::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; right: 0; left: 0;
+    height: 10px;
+    background: rgba(176, 141, 87, 0.30);
+    z-index: -1;
+  }
+
+  .hero-subtitle {
+    font-size: 22px;
+    color: var(--muted);
+    max-width: 720px;
+    margin: 0 auto;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 32px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 30px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .hero-cta:hover { background: var(--rust); transform: translateY(-2px); }
+  .hero-cta .arrow { font-family: 'Playfair Display', serif; transition: transform 0.3s; }
+  .hero-cta:hover .arrow { transform: translateX(-4px); }
+
+  .hero-supervisor {
+    margin: 28px auto 0;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    max-width: 540px;
+    font-size: 15px;
+    color: var(--copper-deep);
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .hero-bottom {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+
+  .stat { text-align: right; }
+  .stat-num { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 54px; line-height: 1; color: var(--ink); margin-bottom: 8px; }
+  .stat-num .unit { font-size: 22px; color: var(--copper-deep); margin-right: 6px; }
+  .stat-label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.4; }
+
+  /* ============ NAV ============ */
+  .nav {
+    position: sticky; top: 0;
+    background: rgba(250, 248, 244, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 200;
+    border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 32px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  .nav-logo { font-weight: 700; color: var(--ink); font-size: 15px; }
+  .nav-logo .en { color: var(--rust); }
+  .nav-links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
+  .nav-links a {
+    color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 500;
+    transition: color 0.2s; position: relative; padding-bottom: 4px;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; right: 0; width: 0; height: 2px;
+    background: var(--rust); transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--rust); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-links a.active { color: var(--rust); }
+  .nav-links a:focus-visible { outline: 2px solid var(--rust); outline-offset: 4px; }
+
+  /* ============ SECTIONS ============ */
+  section { padding: 100px 0; position: relative; }
+
+  .section-eyebrow {
+    font-family: 'Playfair Display', serif; font-style: italic; color: var(--copper-deep);
+    font-size: 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 14px;
+  }
+  .section-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .section-eyebrow .ch { font-family: 'Playfair Display', serif; color: var(--rust); font-weight: 900; font-size: 28px; line-height: 1; }
+
+  .section-title { font-size: clamp(32px, 4vw, 48px); font-weight: 900; color: var(--ink); margin-bottom: 24px; line-height: 1.2; letter-spacing: -0.01em; }
+  .section-intro { font-size: 19px; color: var(--muted); max-width: 820px; line-height: 1.8; margin-bottom: 64px; }
+
+  /* ============ INTRO ============ */
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .intro-grid p { margin-bottom: 18px; }
+  .intro-grid p strong { color: var(--ink); font-weight: 700; }
+
+  .pull-quote {
+    background: var(--paper-warm); border-right: 4px solid var(--rust);
+    padding: 32px 36px; margin: 8px 0; font-family: 'Amiri', serif; font-size: 22px;
+    line-height: 1.7; color: var(--ink); font-style: italic; position: relative;
+  }
+  .pull-quote::before {
+    content: '\201D'; position: absolute; top: -10px; right: 24px;
+    font-family: 'Playfair Display', serif; font-size: 80px; color: var(--copper); opacity: 0.4; line-height: 1;
+  }
+  .pull-quote cite { display: block; margin-top: 16px; font-family: 'Tajawal', sans-serif; font-size: 14px; font-style: normal; color: var(--muted); letter-spacing: 0.05em; }
+
+  /* ============ DEMO (recommendation engine) ============ */
+  .demo { background: var(--ink); color: var(--paper); padding: 100px 0; position: relative; overflow: hidden; }
+  .demo .container { max-width: 1100px; }
+  .demo .section-eyebrow { color: var(--copper); }
+  .demo .section-eyebrow .ch { color: var(--copper); }
+  .demo .section-eyebrow::after { background: rgba(250,248,244,0.15); }
+  .demo .section-title { color: var(--paper); }
+  .demo .section-intro { color: rgba(250,248,244,0.72); }
+
+  .demo-modes { display: flex; gap: 0; border: 1px solid rgba(250,248,244,0.3); width: fit-content; margin-bottom: 14px; }
+  .demo-mode-btn {
+    background: transparent; color: rgba(250,248,244,0.8); border: none; padding: 11px 22px;
+    font-family: 'Tajawal', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.25s;
+  }
+  .demo-mode-btn.active { background: var(--copper); color: var(--ink-deep); }
+  .demo-mode-btn:focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
+  .demo-mode-desc { font-size: 14px; color: rgba(250,248,244,0.6); margin-bottom: 30px; min-height: 22px; }
+  .demo-mode-desc .en { color: var(--copper); }
+
+  .demo-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
+
+  .demo-panel-label {
+    font-size: 13px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--copper);
+    margin-bottom: 18px; display: flex; align-items: center; gap: 10px;
+  }
+  .demo-panel-label .hint { color: rgba(250,248,244,0.45); text-transform: none; letter-spacing: 0; font-size: 13px; }
+
+  .catalog { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .product {
+    background: rgba(250,248,244,0.05); border: 1px solid rgba(250,248,244,0.14);
+    border-radius: 8px; padding: 16px 14px; cursor: pointer; text-align: center;
+    transition: all 0.25s; position: relative; user-select: none;
+  }
+  .product:hover { background: rgba(250,248,244,0.10); border-color: var(--copper); transform: translateY(-3px); }
+  .product:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+  .product .emoji { font-size: 34px; line-height: 1; display: block; margin-bottom: 10px; }
+  .product .p-name { font-size: 13.5px; font-weight: 500; color: var(--paper); line-height: 1.4; }
+  .product .p-cat { font-size: 11px; color: rgba(250,248,244,0.5); margin-top: 4px; }
+  .product.liked { background: var(--copper); border-color: var(--copper); }
+  .product.liked .p-name, .product.liked .p-cat { color: var(--ink-deep); }
+  .product .like-flag {
+    position: absolute; top: 8px; left: 8px; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--rust); color: var(--paper); font-size: 12px; display: none; align-items: center; justify-content: center;
+  }
+  .product.liked .like-flag { display: flex; }
+
+  .demo-actions { margin-top: 18px; display: flex; gap: 12px; align-items: center; }
+  .btn-reset {
+    background: transparent; color: rgba(250,248,244,0.7); border: 1px solid rgba(250,248,244,0.3);
+    padding: 8px 18px; font-family: 'Tajawal', sans-serif; font-size: 13px; cursor: pointer; border-radius: 2px; transition: all 0.25s;
+  }
+  .btn-reset:hover { border-color: var(--rust); color: var(--paper); }
+  .demo-counter { font-size: 13px; color: rgba(250,248,244,0.55); }
+  .demo-counter b { color: var(--copper); font-family: 'Playfair Display', serif; }
+
+  .recs { background: rgba(250,248,244,0.05); border: 1px solid rgba(250,248,244,0.14); border-radius: 10px; padding: 24px; min-height: 320px; }
+  .recs-head { font-family: 'Playfair Display', serif; font-size: 19px; color: var(--paper); margin-bottom: 4px; }
+  .recs-sub { font-size: 13px; color: rgba(250,248,244,0.55); margin-bottom: 20px; }
+
+  .rec-empty { text-align: center; padding: 40px 12px; color: rgba(250,248,244,0.5); }
+  .rec-empty .big { font-size: 40px; margin-bottom: 12px; }
+  .rec-empty .coldstart {
+    margin-top: 16px; font-size: 12px; color: var(--copper);
+    border-top: 1px solid rgba(250,248,244,0.12); padding-top: 14px; line-height: 1.6;
+  }
+
+  .rec-item { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid rgba(250,248,244,0.1); animation: recIn 0.5s ease backwards; }
+  .rec-item:last-child { border-bottom: none; }
+  @keyframes recIn { from { opacity: 0; transform: translateX(-12px); } }
+  .rec-emoji { font-size: 30px; flex-shrink: 0; }
+  .rec-body { flex: 1; min-width: 0; }
+  .rec-name { font-size: 15px; font-weight: 500; color: var(--paper); }
+  .rec-why { font-size: 12px; color: rgba(250,248,244,0.6); line-height: 1.5; margin-top: 3px; }
+  .rec-why .en { color: var(--copper); }
+  .rec-score { text-align: left; flex-shrink: 0; width: 64px; }
+  .rec-score .pct { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 17px; color: var(--copper); }
+  .rec-bar { height: 4px; background: rgba(250,248,244,0.15); border-radius: 4px; margin-top: 4px; overflow: hidden; }
+  .rec-bar span { display: block; height: 100%; background: var(--copper); border-radius: 4px; transition: width 0.6s ease; }
+
+  .demo-note { margin-top: 22px; font-size: 12.5px; color: rgba(250,248,244,0.5); line-height: 1.7; border-top: 1px solid rgba(250,248,244,0.12); padding-top: 16px; }
+  .demo-note .en { color: var(--copper); }
+
+  /* ============ MODELS ============ */
+  .models-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .model-card { background: var(--paper); border: 1px solid var(--line); padding: 36px 32px; position: relative; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); overflow: hidden; }
+  .model-card::before { content: ''; position: absolute; top: 0; right: 0; width: 0; height: 100%; background: var(--ink); transition: width 0.4s cubic-bezier(0.4,0,0.2,1); z-index: 0; }
+  .model-card:hover::before { width: 100%; }
+  .model-card:hover { color: var(--paper); border-color: var(--ink); }
+  .model-card:hover .model-num, .model-card:hover .model-name, .model-card:hover .model-name-ar, .model-card:hover .model-desc, .model-card:hover .model-eg { color: var(--paper); }
+  .model-card:hover .model-eg { border-color: rgba(250,248,244,0.2); }
+  .model-card:hover .model-tag { background: var(--copper); color: var(--paper); }
+  .model-card > * { position: relative; z-index: 1; }
+  .model-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 14px; color: var(--copper-deep); margin-bottom: 16px; transition: color 0.3s; }
+  .model-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 24px; color: var(--ink); margin-bottom: 6px; line-height: 1.2; transition: color 0.3s; }
+  .model-name-ar { font-size: 15px; color: var(--muted); margin-bottom: 20px; transition: color 0.3s; }
+  .model-tag { display: inline-block; background: var(--paper-warm); color: var(--ink); padding: 4px 12px; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; margin-bottom: 18px; transition: all 0.3s; }
+  .model-desc { font-size: 15px; line-height: 1.7; color: var(--ink-deep); margin-bottom: 20px; transition: color 0.3s; }
+  .model-eg { border-top: 1px solid var(--line); padding-top: 16px; font-size: 14px; color: var(--muted); line-height: 1.6; transition: all 0.3s; }
+  .model-eg strong { color: var(--rust); font-weight: 700; }
+
+  /* ============ PIPELINE ============ */
+  .pipeline { background: var(--paper-warm); padding: 100px 0; }
+  .pipeline .container { max-width: 1100px; }
+  .pipe-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: 0; margin-top: 30px; }
+  .pipe-stage {
+    background: var(--paper); border: 1px solid var(--line); border-top: 4px solid var(--ink);
+    padding: 26px 22px; cursor: pointer; transition: all 0.3s; position: relative;
+  }
+  .pipe-stage:hover, .pipe-stage.active { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(31,58,95,0.12); border-top-color: var(--rust); }
+  .pipe-stage .pipe-en { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: var(--ink); }
+  .pipe-stage .pipe-ar { font-size: 15px; font-weight: 700; color: var(--rust); margin: 4px 0 10px; }
+  .pipe-stage .pipe-desc { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+  .pipe-stage .pipe-vol { margin-top: 14px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 13px; color: var(--copper-deep); }
+  .pipe-arrow { display: flex; align-items: center; justify-content: center; padding: 0 14px; }
+  .pipe-arrow span { font-family: 'Playfair Display', serif; font-size: 30px; color: var(--copper); transform: scaleX(-1); }
+  .pipe-funnel { margin-top: 28px; display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--muted); justify-content: center; flex-wrap: wrap; }
+  .pipe-funnel .chip { background: var(--paper); border: 1px solid var(--line); padding: 6px 14px; border-radius: 20px; }
+  .pipe-funnel .chip b { font-family: 'Playfair Display', serif; color: var(--ink); }
+
+  /* ============ COMPANIES ============ */
+  .companies { background: var(--paper); padding: 100px 0; }
+  .companies .container { max-width: 1200px; }
+  .company-row { display: grid; grid-template-columns: 100px 220px 1fr 150px; gap: 32px; align-items: center; padding: 36px 0; border-bottom: 1px solid var(--line); transition: padding 0.3s; }
+  .company-row:hover { padding-right: 16px; }
+  .company-row:last-child { border-bottom: none; }
+  .company-rank { font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 900; color: var(--copper); line-height: 1; opacity: 0.6; }
+  .company-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 28px; color: var(--ink); line-height: 1.1; }
+  .company-origin { font-size: 13px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .company-desc { font-size: 15px; line-height: 1.7; color: var(--ink-deep); }
+  .company-desc strong { color: var(--rust); font-weight: 700; }
+  .company-stat { text-align: left; padding-right: 24px; border-right: 2px solid var(--rust); }
+  .company-stat-num { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 30px; color: var(--ink); line-height: 1; }
+  .company-stat-label { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  /* ============ CHARTS / BY THE NUMBERS ============ */
+  .charts { background: var(--paper-warm); padding: 100px 0; }
+  .charts .container { max-width: 1100px; }
+  .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 20px; }
+  .chart-card { }
+  .chart-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: var(--ink); margin-bottom: 4px; }
+  .chart-sub { font-size: 13px; color: var(--muted); margin-bottom: 26px; }
+
+  /* metric bars */
+  .metric { margin-bottom: 22px; }
+  .metric-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 7px; }
+  .metric-label { font-size: 14px; color: var(--ink-deep); font-weight: 500; }
+  .metric-label .en { color: var(--copper-deep); font-size: 13px; }
+  .metric-val { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 18px; color: var(--rust); }
+  .metric-track { height: 10px; background: rgba(31,58,95,0.08); border-radius: 6px; overflow: hidden; }
+  .metric-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--ink), var(--copper)); border-radius: 6px; transition: width 1.1s cubic-bezier(0.2,0.7,0.2,1); }
+
+  /* market growth bars */
+  .growth { display: flex; align-items: flex-end; gap: 40px; height: 260px; padding: 44px 20px 0; }
+  .growth-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+  .growth-bar { width: 100%; max-width: 110px; background: linear-gradient(180deg, var(--copper), var(--ink)); border-radius: 8px 8px 0 0; height: 0; transition: height 1.2s cubic-bezier(0.2,0.7,0.2,1); position: relative; }
+  .growth-bar.future { background: repeating-linear-gradient(45deg, var(--rust), var(--rust) 8px, #b5552f 8px, #b5552f 16px); }
+  .growth-val { position: absolute; top: -34px; left: 0; right: 0; text-align: center; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 22px; color: var(--ink); }
+  .growth-bar.future .growth-val { color: var(--rust); }
+  .growth-year { margin-top: 14px; font-family: 'Playfair Display', serif; font-weight: 700; color: var(--muted); }
+  .growth-cagr { text-align: center; margin-top: 22px; font-size: 14px; color: var(--muted); }
+  .growth-cagr b { color: var(--rust); font-family: 'Playfair Display', serif; font-size: 18px; }
+
+  /* donut */
+  .donut-wrap { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; justify-content: center; }
+  .donut { --val: 0; width: 170px; height: 170px; border-radius: 50%;
+    background: conic-gradient(var(--ink) calc(var(--val)*1%), rgba(31,58,95,0.10) 0);
+    display: flex; align-items: center; justify-content: center; transition: background 1.2s ease; }
+  .donut .donut-hole { width: 116px; height: 116px; background: var(--paper-warm); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .donut .donut-pct { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 34px; color: var(--ink); }
+  .donut .donut-cap { font-size: 11px; color: var(--muted); }
+  .donut-legend { font-size: 14px; color: var(--ink-deep); line-height: 1.9; }
+  .donut-legend .src { color: var(--muted); font-size: 12px; }
+
+  /* ============ TIMELINE ============ */
+  .timeline-wrap { position: relative; margin-top: 80px; }
+  .tl-toggle { display: flex; gap: 0; margin: 0 auto 60px; border: 1px solid var(--ink); width: fit-content; }
+  .tl-btn { background: var(--paper); color: var(--ink); border: none; padding: 12px 28px; font-family: 'Tajawal', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; }
+  .tl-btn.active { background: var(--ink); color: var(--paper); }
+  .tl-btn:not(.active):hover { background: var(--paper-warm); }
+  .tl-btn:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
+  .timeline { position: relative; padding: 20px 0; }
+  .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; right: 50%; width: 2px; background: var(--line); transform: translateX(50%); }
+  .tl-item { display: grid; grid-template-columns: 1fr 80px 1fr; gap: 32px; margin-bottom: 56px; align-items: center; }
+  .tl-year { grid-column: 2; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 21px; text-align: center; color: var(--paper); background: var(--ink); width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 50%; position: relative; z-index: 2; line-height: 1; }
+  .tl-year.saudi { background: var(--rust); }
+  .tl-year.future { background: var(--paper); color: var(--rust); border: 2px dashed var(--rust); }
+  .tl-card { background: var(--paper); border: 1px solid var(--line); padding: 24px 28px; position: relative; }
+  .tl-item.right .tl-card { grid-column: 1; }
+  .tl-item.left .tl-card { grid-column: 3; }
+  .tl-card::after { content: ''; position: absolute; top: 50%; width: 16px; height: 1px; background: var(--line); }
+  .tl-item.right .tl-card::after { right: -16px; }
+  .tl-item.left .tl-card::after { left: -16px; }
+  .tl-card-flag { display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px; padding: 3px 10px; font-weight: 600; }
+  .tl-card-flag.global { background: var(--ink); color: var(--paper); }
+  .tl-card-flag.saudi { background: var(--rust); color: var(--paper); }
+  .tl-card h4 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--ink); margin-bottom: 8px; line-height: 1.2; }
+  .tl-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .tl-card .tl-model { margin-top: 12px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 13px; color: var(--copper-deep); }
+
+  /* ============ CHALLENGES ============ */
+  .challenges-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 40px; }
+  .challenge { border-top: 4px solid var(--rust); padding-top: 20px; }
+  .challenge .ch-num { font-family: 'Playfair Display', serif; font-style: italic; color: var(--copper-deep); font-size: 14px; margin-bottom: 12px; }
+  .challenge h4 { font-size: 21px; font-weight: 700; color: var(--ink); margin-bottom: 12px; line-height: 1.3; }
+  .challenge p { font-size: 15px; line-height: 1.7; color: var(--ink-deep); }
+
+  /* ============ FUTURE ============ */
+  .future { background: var(--ink); color: var(--paper); padding: 120px 0; position: relative; overflow: hidden; }
+  .future::before { content: '2031'; position: absolute; top: 50%; left: -50px; transform: translateY(-50%); font-family: 'Playfair Display', serif; font-weight: 900; font-size: 440px; line-height: 1; color: rgba(250,248,244,0.04); z-index: 0; pointer-events: none; }
+  .future .container { position: relative; z-index: 1; }
+  .future .section-eyebrow { color: var(--copper); }
+  .future .section-eyebrow .ch { color: var(--copper); }
+  .future .section-eyebrow::after { background: rgba(250,248,244,0.15); }
+  .future .section-title { color: var(--paper); }
+  .future .section-intro { color: rgba(250,248,244,0.7); }
+  .future-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
+  .future-item { border-top: 2px solid var(--copper); padding-top: 24px; }
+  .future-item h4 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; color: var(--paper); line-height: 1.2; }
+  .future-item p { font-size: 15px; line-height: 1.7; color: rgba(250,248,244,0.8); }
+
+  /* ============ FOOTER ============ */
+  footer { background: var(--ink-deep); color: var(--paper); padding: 60px 32px 40px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto 40px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; }
+  .footer-about h5, .footer-col h5 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 16px; color: var(--copper); }
+  .footer-about p { font-size: 14px; line-height: 1.7; color: rgba(250,248,244,0.7); }
+  .footer-col ul { list-style: none; padding: 0; }
+  .footer-col li { font-size: 14px; margin-bottom: 8px; color: rgba(250,248,244,0.7); }
+  .footer-col a { color: rgba(250,248,244,0.7); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--copper); }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(250,248,244,0.1); display: flex; justify-content: space-between; font-size: 12px; color: rgba(250,248,244,0.5); flex-wrap: wrap; gap: 16px; }
+
+  /* ============ BACK TO TOP ============ */
+  .to-top {
+    position: fixed; bottom: 28px; left: 28px; width: 48px; height: 48px; border-radius: 50%;
+    background: var(--ink); color: var(--paper); border: none; cursor: pointer; font-size: 20px;
+    display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden;
+    transition: all 0.3s; z-index: 200; box-shadow: 0 8px 24px rgba(20,42,68,0.3);
+  }
+  .to-top.show { opacity: 1; visibility: visible; }
+  .to-top:hover { background: var(--rust); transform: translateY(-3px); }
+  .to-top:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .hero-bottom { grid-template-columns: repeat(2, 1fr); }
+    .intro-grid { grid-template-columns: 1fr; gap: 32px; }
+    .demo-grid { grid-template-columns: 1fr; gap: 28px; }
+    .catalog { grid-template-columns: repeat(3, 1fr); }
+    .models-grid { grid-template-columns: 1fr; }
+    .pipe-flow { grid-template-columns: 1fr; }
+    .pipe-arrow { padding: 8px 0; }
+    .pipe-arrow span { transform: rotate(90deg); }
+    .company-row { grid-template-columns: 60px 1fr; gap: 16px; }
+    .company-desc, .company-stat { grid-column: 1 / -1; }
+    .company-stat { border-right: none; padding-right: 0; text-align: right; }
+    .charts-grid { grid-template-columns: 1fr; gap: 48px; }
+    .timeline::before { right: 32px; }
+    .tl-item { grid-template-columns: 64px 1fr; }
+    .tl-year { grid-column: 1; width: 64px; height: 64px; font-size: 17px; }
+    .tl-item.right .tl-card, .tl-item.left .tl-card { grid-column: 2; }
+    .tl-item.right .tl-card::after, .tl-item.left .tl-card::after { right: -16px; left: auto; }
+    .future-grid, .challenges-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .future::before { font-size: 220px; }
+  }
+  @media (max-width: 560px) {
+    .catalog { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { gap: 16px; }
+  }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; }
+    .hero-aura { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+<h1 class="sr-only">أنظمة التوصية الذكية في التجارة الإلكترونية — مشروع بحثي تفاعلي في مقرر Advanced Deep Learning</h1>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-aura"></div>
+  <div class="hero-top">
+    <span>Advanced Deep Learning · <span class="num">1447</span> AH</span>
+    <span class="badge">مشروع بحثي تفاعلي</span>
+  </div>
+
+  <div class="hero-center">
+    <div class="hero-eyebrow">A research case study in</div>
+    <h1>أنظمة <span class="accent">التوصية</span> الذكية<br>في التجارة الإلكترونية</h1>
+    <p class="hero-subtitle">كيف يُعيد التعلم العميق (<span class="en">Deep Learning</span>) تشكيل ما نراه ونشتريه على منصات <span class="en">Amazon</span> و<span class="en">Alibaba</span> و<span class="en">noon</span> — من خوارزميات الترشيح إلى مساعدي التسوّق التوليديين.</p>
+    <br>
+    <a href="#demo" class="hero-cta">جرّب محرّك التوصية بنفسك <span class="arrow">&larr;</span></a>
+    <p class="hero-supervisor">إعداد: خالد حسن سعيد الحربي · تحت إشراف د. أحمد بن حسن الهندي</p>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="stat"><div class="stat-num"><span class="num">35</span><span class="unit">%</span></div><div class="stat-label">من مبيعات Amazon مصدرها التوصية</div></div>
+    <div class="stat"><div class="stat-num"><span class="num">75</span><span class="unit">%</span></div><div class="stat-label">من مشاهدات Netflix تقودها التوصية</div></div>
+    <div class="stat"><div class="stat-num"><span class="num">60</span><span class="unit">%</span></div><div class="stat-label">زيادة احتمال إتمام الشراء مع Rufus</div></div>
+    <div class="stat"><div class="stat-num"><span class="unit">$</span><span class="num">55</span><span class="unit">B</span></div><div class="stat-label">حجم السوق السعودي المتوقع بحلول 2031</div></div>
+  </div>
+</header>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo"><span class="en">AI</span> × التجارة الإلكترونية</span>
+    <ul class="nav-links">
+      <li><a href="#intro">المقدمة</a></li>
+      <li><a href="#demo">جرّب</a></li>
+      <li><a href="#models">النماذج</a></li>
+      <li><a href="#pipeline">كيف تعمل</a></li>
+      <li><a href="#companies">الشركات</a></li>
+      <li><a href="#charts">بالأرقام</a></li>
+      <li><a href="#timeline">الخط الزمني</a></li>
+      <li><a href="#future">المستقبل</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ INTRO ============ -->
+<section id="intro">
+  <div class="container reveal">
+    <div class="section-eyebrow"><span class="ch num">1</span><span>المقدمة</span></div>
+    <h2 class="section-title">المحرّك الخفي<br>وراء كل عملية شراء</h2>
+    <p class="section-intro">خلف كل صفحة منتج وكل قائمة «قد يعجبك أيضاً» يعمل نظام توصية (<span class="en">Recommendation System</span>) صار العمود الفقري التجاري لمنصات التجارة الإلكترونية الكبرى، لا مجرد ميزة إضافية.</p>
+    <div class="intro-grid">
+      <div>
+        <p>تحوّلت أنظمة التوصية من قواعد بسيطة وترشيح تعاوني (<span class="en">Collaborative Filtering</span>) إلى شبكات تعلّم عميق تتنبّأ باهتمام المستخدم لحظةً بلحظة. تشير تقديرات <strong>McKinsey</strong> إلى أن نحو <span class="num">35</span>٪ من مشتريات <span class="en">Amazon</span> تنشأ من التوصيات، وأن المحرّك ذاته يقف خلف قرابة <span class="num">75</span>٪ من ساعات المشاهدة على <span class="en">Netflix</span>.</p>
+        <p>يتتبّع هذا التقرير تطوّر هذه الأنظمة عبر ثلاث عائلات من النماذج، وثلاث شركات تقود الميدان عالمياً، ثم يربطها بالسوق السعودي الصاعد في ظل <strong>رؤية 2030</strong>. وللتوضيح، تتيح هذه الصفحة تجربة محرّك توصية حيّ في القسم التالي.</p>
+      </div>
+      <div>
+        <blockquote class="pull-quote">
+          نظام التوصية الجيّد لا يجيب عن سؤال «ماذا يوجد لدينا؟»، بل عن سؤال أصعب: «ما الذي يريده هذا المستخدم تحديداً، الآن؟».
+          <cite>— الفكرة المحورية للتقرير</cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEMO ============ -->
+<section id="demo" class="demo">
+  <div class="container reveal">
+    <div class="section-eyebrow"><span class="ch num">2</span><span>جرّب بنفسك</span></div>
+    <h2 class="section-title">محرّك توصية حيّ</h2>
+    <p class="section-intro">بدّل بين أسلوبَي التوصية، ثم اختر منتجات تعجبك من المتجر. سيحسب المحرّك توصياته فوراً ويشرح <em>لماذا</em> اقترح كل منتج — تماماً كالمبدأ الذي تقوم عليه الأنظمة الحقيقية.</p>
+
+    <div class="demo-modes" role="tablist" aria-label="أسلوب التوصية">
+      <button class="demo-mode-btn active" data-mode="content" aria-pressed="true">التوصية بالمحتوى</button>
+      <button class="demo-mode-btn" data-mode="collab" aria-pressed="false">الترشيح التعاوني</button>
+    </div>
+    <p class="demo-mode-desc" id="modeDesc">يوصي بمنتجات تشبه ما أعجبك في <span class="en">سماتها</span> (الفئة، الخصائص) — أسلوب <span class="en">Content-Based Filtering</span>.</p>
+
+    <div class="demo-grid">
+      <div>
+        <div class="demo-panel-label">المتجر <span class="hint">— اضغط المنتجات التي تعجبك</span></div>
+        <div class="catalog" id="catalog"></div>
+        <div class="demo-actions">
+          <button class="btn-reset" id="resetBtn">إعادة الضبط</button>
+          <span class="demo-counter">اخترتَ <b id="likeCount">0</b> من المنتجات</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="demo-panel-label">التوصيات</div>
+        <div class="recs" id="recs"></div>
+        <p class="demo-note" id="demoNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODELS ============ -->
+<section id="models">
+  <div class="container reveal">
+    <div class="section-eyebrow"><span class="ch num">3</span><span>النماذج التقنية</span></div>
+    <h2 class="section-title">ثلاث عائلات من النماذج<br>تُحرّك التوصية الحديثة</h2>
+    <p class="section-intro">اختار التقرير ثلاث عائلات تمثّل ثلاثة أنماط مختلفة لفهم المستخدم: التسلسل الزمني، العلاقات الشبكية، واللغة الطبيعية.</p>
+    <div class="models-grid">
+      <article class="model-card">
+        <div class="model-num">Family 01</div>
+        <h3 class="model-name">Sequential Models</h3>
+        <div class="model-name-ar">نماذج التسلسل (SASRec · BERT4Rec)</div>
+        <span class="model-tag">Predictive AI</span>
+        <p class="model-desc">تنظر إلى سلوك المستخدم كسلسلة زمنية من النقرات والمشتريات، وتستخدم آلية الانتباه الذاتي (<span class="en">Self-Attention</span>) للتنبؤ بالعنصر التالي. <span class="en">SASRec</span> أحادي الاتجاه، بينما <span class="en">BERT4Rec</span> ثنائي الاتجاه عبر إخفاء العناصر.</p>
+        <div class="model-eg"><strong>أساس علمي:</strong> SASRec (arXiv 1808.09781) و BERT4Rec (arXiv 1904.06690) — الأخير حقّق تحسناً يتجاوز 7٪ في HR@10.</div>
+      </article>
+      <article class="model-card">
+        <div class="model-num">Family 02</div>
+        <h3 class="model-name">Graph Neural Networks</h3>
+        <div class="model-name-ar">الشبكات العصبية للرسوم البيانية (GNN)</div>
+        <span class="model-tag">Predictive AI</span>
+        <p class="model-desc">تمثّل المستخدمين والمنتجات كعُقد في رسم بياني ضخم، وتتعلّم من العلاقات بينها. <span class="en">PinSage</span> من <span class="en">Pinterest</span> هو التطبيق الصناعي الأبرز، عاملاً على رسم بياني بمليارات العُقد.</p>
+        <div class="model-eg"><strong>أساس علمي:</strong> PinSage (arXiv 1806.01973) — يعمل على 3 مليار عقدة و18 مليار حافة، بُني فوق GraphSAGE.</div>
+      </article>
+      <article class="model-card">
+        <div class="model-num">Family 03</div>
+        <h3 class="model-name">LLMs &amp; Generative</h3>
+        <div class="model-name-ar">النماذج اللغوية والتوليدية (RAG · Rufus)</div>
+        <span class="model-tag">Generative AI</span>
+        <p class="model-desc">تنقل التوصية من قوائم جامدة إلى حوار طبيعي. تجمع بين الاسترجاع والتوليد (<span class="en">RAG</span>) لتقديم اقتراحات مُفسَّرة، وهي البنية التي يقوم عليها مساعد التسوّق <span class="en">Rufus</span> من <span class="en">Amazon</span>.</p>
+        <div class="model-eg"><strong>أساس علمي:</strong> RAG (arXiv 2005.11401) — يربط نموذجاً لغوياً بقاعدة معرفة خارجية لتقليل الهلوسة وتحديث المعلومة.</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PIPELINE ============ -->
+<section id="pipeline" class="pipeline">
+  <div class="container reveal">
+    <div class="section-eyebrow"><span class="ch num">4</span><span>كيف تعمل التوصية</span></div>
+    <h2 class="section-title">من مليارات المنتجات<br>إلى بِضعِ توصيات</h2>
+    <p class="section-intro">لا يُصنّف نظام التوصية كامل الكتالوج لكل مستخدم؛ بل يمرّ عبر مراحل تضيّق الخيارات تدريجياً. اضغط أي مرحلة لمعرفة دورها.</p>
+
+    <div class="pipe-flow" id="pipeFlow">
+      <div class="pipe-stage active" data-stage="0" tabindex="0" role="button">
+        <div class="pipe-en">Retrieval</div>
+        <div class="pipe-ar">الاسترجاع</div>
+        <div class="pipe-desc">تصفية أوّلية سريعة تختصر ملايين المنتجات إلى مرشّحين قلائل، غالباً ببنية <span class="en">Two-Tower</span>.</div>
+        <div class="pipe-vol">ملايين ← مئات</div>
+      </div>
+      <div class="pipe-arrow"><span>&rarr;</span></div>
+      <div class="pipe-stage" data-stage="1" tabindex="0" role="button">
+        <div class="pipe-en">Ranking</div>
+        <div class="pipe-ar">الترتيب</div>
+        <div class="pipe-desc">نموذج عميق دقيق يقدّر احتمال النقر (<span class="en">CTR</span>) والشراء لكل مرشّح، فيرتّبهم بدقة.</div>
+        <div class="pipe-vol">مئات ← عشرات</div>
+      </div>
+      <div class="pipe-arrow"><span>&rarr;</span></div>
+      <div class="pipe-stage" data-stage="2" tabindex="0" role="button">
+        <div class="pipe-en">Re-ranking</div>
+        <div class="pipe-ar">إعادة الترتيب</div>
+        <div class="pipe-desc">ضبط نهائي للتنوّع والعدالة وقواعد العمل، لتفادي التكرار وفقاعة الترشيح.</div>
+        <div class="pipe-vol">عشرات ← توصية</div>
+      </div>
+    </div>
+
+    <div class="pipe-funnel">
+      <span class="chip"><b>10⁶+</b> منتج</span>
+      <span>&larr;</span>
+      <span class="chip"><b>~500</b> مرشّح</span>
+      <span>&larr;</span>
+      <span class="chip"><b>~50</b> مُرتّب</span>
+      <span>&larr;</span>
+      <span class="chip"><b>~10</b> معروضة</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPANIES ============ -->
+<section id="companies" class="companies">
+  <div class="container reveal">
+    <div class="section-eyebrow"><span class="ch num">5</span><span>حالات دراسية</span></div>
+    <h2 class="section-title">من يبني هذا المجال<br>في العالم اليوم</h2>
+    <p class="section-intro">ثلاث منصات تمثّل ثلاثة مسارات مختلفة: التوليد المحادث، نمذجة الاهتمام، والرسوم البيانية على نطاق المليارات.</p>
+
+    <div class="company-row">
+      <div class="company-rank num">01</div>
+      <div><div class="company-name">Amazon</div><div class="company-origin">USA</div></div>
+      <div class="company-desc">أطلقت عام <span class="num">2024</span> مساعد التسوّق <strong>Rufus</strong> ببنية نموذج لغوي مخصّص على <span class="en">Amazon Bedrock</span>، يدمج <span class="en">RAG</span> والتعلّم المعزّز. التوصيات تقف خلف نحو <strong>35٪</strong> من مبيعات المنصة.</div>
+      <div class="company-stat"><div class="company-stat-num">+<span class="num">60</span>%</div><div class="company-stat-label">أكثر ميلاً لإتمام الشراء عند استخدام Rufus</div></div>
+    </div>
+    <div class="company-row">
+      <div class="company-rank num">02</div>
+      <div><div class="company-name">Alibaba</div><div class="company-origin">China · Taobao</div></div>
+      <div class="company-desc">رائدة في نمذجة اهتمام المستخدم عبر <strong>DIN</strong> ثم <strong>DIEN</strong>، باستخدام وحدة تفعيل محلية (<span class="en">Local Activation Unit</span>) تلتقط الاهتمامات المتغيّرة، مُدرَّبة على أكثر من ملياري عيّنة.</div>
+      <div class="company-stat"><div class="company-stat-num">+<span class="num">20.7</span>%</div><div class="company-stat-label">تحسّن في CTR بنموذج DIEN على Taobao</div></div>
+    </div>
+    <div class="company-row">
+      <div class="company-rank num">03</div>
+      <div><div class="company-name">Pinterest</div><div class="company-origin">USA</div></div>
+      <div class="company-desc">طوّرت <strong>PinSage</strong>، أول تطبيق صناعي للشبكات العصبية للرسوم البيانية على نطاق الويب، مُدرَّباً على <span class="num">7.5</span> مليار مثال لتقديم توصيات بصرية في ميزة <span class="en">Shop the Look</span>.</div>
+      <div class="company-stat"><div class="company-stat-num">+<span class="num">25</span>%</div><div class="company-stat-label">زيادة في مرّات الظهور (impressions)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHARTS ============ -->
+<section id="charts" class="charts">
+  <div class="container reveal">
+    <div class="section-eyebrow"><span class="ch num">6</span><span>بالأرقام</span></div>
+    <h2 class="section-title">الأثر الموثّق<br>في الأرقام</h2>
+    <p class="section-intro">كل رقم هنا مأخوذ من ورقة علمية أو تقرير صناعي مذكور في قائمة المراجع.</p>
+
+    <div class="charts-grid">
+      <div class="chart-card" id="metricsCard">
+        <div class="chart-title">أثر النماذج على الأداء</div>
+        <div class="chart-sub">تحسّن موثّق في مؤشرات حقيقية بعد تطبيق نماذج التعلم العميق</div>
+
+        <div class="metric" data-fill="74">
+          <div class="metric-top"><span class="metric-label">Amazon Rufus <span class="en">· purchase intent</span></span><span class="metric-val">+60%</span></div>
+          <div class="metric-track"><div class="metric-fill"></div></div>
+        </div>
+        <div class="metric" data-fill="40">
+          <div class="metric-top"><span class="metric-label">Pinterest PinSage <span class="en">· impressions</span></span><span class="metric-val">+25%</span></div>
+          <div class="metric-track"><div class="metric-fill"></div></div>
+        </div>
+        <div class="metric" data-fill="33">
+          <div class="metric-top"><span class="metric-label">Alibaba DIEN <span class="en">· CTR</span></span><span class="metric-val">+20.7%</span></div>
+          <div class="metric-track"><div class="metric-fill"></div></div>
+        </div>
+        <div class="metric" data-fill="18">
+          <div class="metric-top"><span class="metric-label">BERT4Rec <span class="en">· HR@10</span></span><span class="metric-val">+7%</span></div>
+          <div class="metric-track"><div class="metric-fill"></div></div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">سوق التجارة الإلكترونية السعودي</div>
+        <div class="chart-sub">حجم السوق بالمليار دولار · المصدر: Mordor Intelligence (2026)</div>
+        <div class="growth" id="growthChart">
+          <div class="growth-col">
+            <div class="growth-bar" data-h="48"><span class="growth-val">$28B</span></div>
+            <div class="growth-year">2025</div>
+          </div>
+          <div class="growth-col">
+            <div class="growth-bar future" data-h="94"><span class="growth-val">$55B</span></div>
+            <div class="growth-year">2031</div>
+          </div>
+        </div>
+        <div class="growth-cagr">نمو سنوي مركّب <b>~12%</b> — نحو مضاعفة الحجم خلال ست سنوات</div>
+
+        <div style="margin-top:48px;" class="donut-wrap" id="donutWrap">
+          <div class="donut" data-val="35"><div class="donut-hole"><div class="donut-pct">35%</div><div class="donut-cap">من المبيعات</div></div></div>
+          <div class="donut-legend">
+            حصّة التوصيات من مبيعات <span class="en">Amazon</span><br>
+            <span class="src">المصدر: McKinsey — قيمة التخصيص في التجزئة</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section id="timeline">
+  <div class="container reveal">
+    <div class="section-eyebrow"><span class="ch num">7</span><span>الخط الزمني</span></div>
+    <h2 class="section-title">مسارٌ عالميٌّ<br>وآخر سعوديٌّ يتقاطعان</h2>
+    <p class="section-intro">تطوّر التعلم العميق في أنظمة التوصية عالمياً يسير بالتوازي مع نضج سوق التجارة الإلكترونية في المملكة. اضغط الأزرار لاستعراض المسارَين أو أحدهما.</p>
+    <div class="timeline-wrap">
+      <div class="tl-toggle" role="tablist" aria-label="تصفية الخط الزمني">
+        <button class="tl-btn active" data-filter="all" aria-pressed="true">الكل</button>
+        <button class="tl-btn" data-filter="global" aria-pressed="false">عالمي</button>
+        <button class="tl-btn" data-filter="saudi" aria-pressed="false">سعودي</button>
+      </div>
+      <div class="timeline" id="timeline">
+        <div class="tl-item right" data-track="global"><div class="tl-year global yr">2016</div><div class="tl-card"><span class="tl-card-flag global">Global</span><h4>Wide &amp; Deep</h4><p>تقدّم Google نموذجاً يجمع بين الحفظ والتعميم في بنية واحدة، فيرسي أساس التوصية بالتعلم العميق على نطاق صناعي.</p><div class="tl-model">arXiv 1606.07792 · Google Play</div></div></div>
+        <div class="tl-item left" data-track="saudi"><div class="tl-year saudi yr">2017</div><div class="tl-card"><span class="tl-card-flag saudi">Saudi</span><h4>استحواذ Amazon على Souq</h4><p>دخول عملاق التوصية العالمي إلى السوق الإقليمي، ونقل خبرات التخصيص (<span class="en">Personalization</span>) إلى المستهلك العربي.</p><div class="tl-model">بداية تحوّل السوق</div></div></div>
+        <div class="tl-item right" data-track="global"><div class="tl-year global yr">2018</div><div class="tl-card"><span class="tl-card-flag global">Global</span><h4>DIN · PinSage · SASRec</h4><p>عام انطلاقة الانتباه والرسوم البيانية: Alibaba تطلق DIN، وPinterest تطلق PinSage، ويظهر SASRec لنمذجة التسلسل.</p><div class="tl-model">Attention &amp; Graphs</div></div></div>
+        <div class="tl-item left" data-track="global"><div class="tl-year global yr">2019</div><div class="tl-card"><span class="tl-card-flag global">Global</span><h4>BERT4Rec · BST · DLRM</h4><p>نماذج ثنائية الاتجاه (BERT4Rec) وبنى صناعية ضخمة للتوصية مثل DLRM من Meta وBST من Alibaba.</p><div class="tl-model">Bidirectional &amp; Scale</div></div></div>
+        <div class="tl-item right" data-track="global"><div class="tl-year global yr">2020</div><div class="tl-card"><span class="tl-card-flag global">Global</span><h4>RAG</h4><p>ورقة Lewis et al. تجمع الاسترجاع بالتوليد، فتفتح الباب لاحقاً أمام التوصية المُفسَّرة والمساعدين المحادثين.</p><div class="tl-model">arXiv 2005.11401</div></div></div>
+        <div class="tl-item left" data-track="saudi"><div class="tl-year saudi yr">2021</div><div class="tl-card"><span class="tl-card-flag saudi">Saudi</span><h4>noon تُوسّع بنيتها بالرياض</h4><p>افتتاح منشأة لوجستية بمساحة 45,000 م²، تمكّن التوصية الفورية والتوصيل السريع في قلب السوق السعودي.</p><div class="tl-model">بنية تحتية للتخصيص</div></div></div>
+        <div class="tl-item right" data-track="global"><div class="tl-year global yr">2024</div><div class="tl-card"><span class="tl-card-flag global">Global</span><h4>Amazon Rufus</h4><p>أول مساعد تسوّق بنموذج لغوي على نطاق واسع، يدمج RAG والتعلّم المعزّز على بنية AWS، ويفهم اللغة الطبيعية.</p><div class="tl-model">Generative Shopping</div></div></div>
+        <div class="tl-item left" data-track="saudi"><div class="tl-year saudi yr">2025</div><div class="tl-card"><span class="tl-card-flag saudi">Saudi</span><h4>السوق يبلغ نحو <span class="en">$28B</span></h4><p>تجارة إلكترونية بنفاذ إنترنت 99٪ وتغطية 5G تناهز 78٪، يقودها Amazon.sa وnoon وSalla وZid.</p><div class="tl-model">~12% نمو سنوي</div></div></div>
+        <div class="tl-item right" data-track="global"><div class="tl-year global yr">2025</div><div class="tl-card"><span class="tl-card-flag global">Global</span><h4>التجارة الوكيلة</h4><p>ظهور ميزات مثل «Help Me Decide» ووكلاء يتّخذون قرار الشراء نيابةً عن المستخدم — أفق التوصية القادم.</p><div class="tl-model">Agentic Commerce</div></div></div>
+        <div class="tl-item left" data-track="saudi"><div class="tl-year saudi future yr">2031</div><div class="tl-card" style="border: 2px dashed var(--rust); background: rgba(156, 67, 33, 0.03);"><span class="tl-card-flag saudi">Saudi · توقّع</span><h4>نحو <span class="en">$55B</span></h4><p>تقديرات Mordor Intelligence تضاعف حجم السوق تقريباً مقارنةً بـ2025 — فرصة بحثية وتجارية للمختصين المحليين.</p><div class="tl-model">~2× نمو متوقّع</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHALLENGES ============ -->
+<section id="challenges">
+  <div class="container reveal">
+    <div class="section-eyebrow"><span class="ch num">8</span><span>التحديات</span></div>
+    <h2 class="section-title">ما لا تُظهره<br>قائمة «قد يعجبك أيضاً»</h2>
+    <p class="section-intro">خلف دقّة التوصية تقف تحدّيات تقنية وأخلاقية وتنظيمية، تكشفها الأوراق العلمية أكثر مما يكشفها التسويق.</p>
+    <div class="challenges-grid">
+      <div class="challenge"><div class="ch-num en">Challenge · 01</div><h4>البداية الباردة وشُح البيانات</h4><p>المستخدم الجديد بلا تاريخ شرائي، والمنتج الجديد بلا تفاعلات — مشكلة <span class="en">Cold Start</span> وتناثر البيانات (<span class="en">Data Sparsity</span>) تبقى التحدّي الجوهري لأي نظام توصية.</p></div>
+      <div class="challenge"><div class="ch-num en">Challenge · 02</div><h4>فقاعة الترشيح والانحياز</h4><p>انحياز الشهرة (<span class="en">Popularity Bias</span>) يضخّم الرائج ويهمّش الذيل الطويل، فيما تحبس فقاعة الترشيح (<span class="en">Filter Bubble</span>) المستخدم في اهتماماته السابقة، مع مخاطر الأنماط المظلمة (<span class="en">Dark Patterns</span>).</p></div>
+      <div class="challenge"><div class="ch-num en">Challenge · 03</div><h4>قابلية التفسير والتنظيم</h4><p>لماذا اقتُرح هذا المنتج تحديداً؟ سؤال تتسارع التشريعات للإجابة عنه: <span class="en">GDPR</span> وحقّ التفسير، و<span class="en">EU AI Act</span> منذ <span class="num">2024</span>، ونظام حماية البيانات السعودي <span class="en">PDPL</span>.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FUTURE ============ -->
+<section id="future" class="future">
+  <div class="container reveal">
+    <div class="section-eyebrow"><span class="ch num">9</span><span>المستقبل</span></div>
+    <h2 class="section-title">ثلاثة تحوّلات قادمة<br>خلال خمس سنوات</h2>
+    <p class="section-intro">تتّجه التوصية بحلول <span class="num">2031</span> نحو تحوّلات جوهرية، أبرزها — للمختصّ السعودي تحديداً — تحوّل المملكة إلى سوقٍ صاعدٍ ومختبرٍ إقليميٍّ للتطبيق.</p>
+    <div class="future-grid">
+      <div class="future-item"><h4>Agentic Commerce</h4><p>الانتقال من نظام يقترح إلى وكيلٍ مستقلّ ينفّذ: يقارن، يختار، ويُتمّ الشراء نيابةً عن المستخدم ضمن حدود يضعها بنفسه.</p></div>
+      <div class="future-item"><h4>Generative &amp; Conversational</h4><p>من قوائم المنتجات الجامدة إلى حوارٍ طبيعيٍّ يولّد الخيارات ويفسّرها، على نهج Rufus والتوصية التوليدية (<span class="en">Generative Recommendation</span>).</p></div>
+      <div class="future-item"><h4>السعودية كسوق صاعد</h4><p>مع رؤية <span class="num">2030</span> ومنصّات مثل noon وSalla وZid، تتّسع الفجوة بين الطلب المحلي والبحث المتخصّص — فرصة استثنائية للباحثين والمطوّرين السعوديين.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-about">
+      <h5>About this page</h5>
+      <p>صفحة تفاعلية مرافقة لتقرير بحثي في مقرر <span class="en">Advanced Deep Learning</span> حول استخدام التعلم العميق في أنظمة التوصية بالتجارة الإلكترونية. مصمّمة بمساعدة أدوات الذكاء الاصطناعي ومنشورة على <span class="en">GitHub Pages</span>. محرّك التوصية في الأعلى نموذج تعليمي مبسّط يعمل بالكامل داخل المتصفّح. كل الإحصاءات والشركات المذكورة موثّقة من مصادر علمية وصناعية حقيقية.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Sources</h5>
+      <ul>
+        <li>arXiv 1706.06978 — DIN</li>
+        <li>arXiv 1806.01973 — PinSage</li>
+        <li>arXiv 1808.09781 — SASRec</li>
+        <li>arXiv 1904.06690 — BERT4Rec</li>
+        <li>McKinsey · Mordor Intelligence</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Companies cited</h5>
+      <ul>
+        <li><a href="https://www.amazon.com" target="_blank" rel="noopener">Amazon — Rufus</a></li>
+        <li><a href="https://www.alibaba.com" target="_blank" rel="noopener">Alibaba — Taobao</a></li>
+        <li><a href="https://www.pinterest.com" target="_blank" rel="noopener">Pinterest — PinSage</a></li>
+        <li><a href="https://www.noon.com" target="_blank" rel="noopener">noon — السعودية</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>خالد حسن سعيد الحربي · <span class="en">Advanced Deep Learning · 1447 AH</span></span>
+    <span class="en">Built with Claude · Hosted on GitHub Pages</span>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="العودة إلى الأعلى">&uarr;</button>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ============ DATA: catalog + feature tags ============ */
+  var TAGS = ["electronics","home","sports","fashion","books","wireless","smart","premium","fitness","gaming","eco","gift"];
+  var CATAR = { electronics:"إلكترونيات", home:"المنزل", sports:"رياضة", fashion:"أزياء", books:"كتب" };
+  var TAGAR = { wireless:"لاسلكي", smart:"ذكي", premium:"فاخر", fitness:"لياقة", gaming:"ألعاب", eco:"صديق للبيئة", gift:"هدية" };
+
+  var PRODUCTS = [
+    { id:1, name:"سماعات لاسلكية", emoji:"🎧", cat:"electronics", tags:["electronics","wireless","premium","gaming"] },
+    { id:2, name:"ساعة ذكية",     emoji:"⌚", cat:"electronics", tags:["electronics","smart","wireless","fitness"] },
+    { id:3, name:"لوحة مفاتيح",    emoji:"⌨️", cat:"electronics", tags:["electronics","gaming","premium"] },
+    { id:4, name:"حذاء جري",       emoji:"👟", cat:"sports",      tags:["sports","fitness"] },
+    { id:5, name:"حقيبة ظهر",      emoji:"🎒", cat:"fashion",     tags:["fashion","gift"] },
+    { id:6, name:"كتاب تعلّم الآلة", emoji:"📘", cat:"books",       tags:["books","premium","gift"] },
+    { id:7, name:"مكنسة روبوت",     emoji:"🤖", cat:"home",        tags:["home","smart","premium"] },
+    { id:8, name:"زجاجة رياضية",    emoji:"🥤", cat:"sports",      tags:["sports","fitness","eco"] },
+    { id:9, name:"مصباح ذكي",       emoji:"💡", cat:"home",        tags:["home","smart","wireless","eco"] }
+  ];
+
+  /* synthetic baskets for collaborative filtering (item co-occurrence) */
+  var BASKETS = [
+    [1,2,3],[1,3],[2,4,8],[4,8],[7,9],[2,9,7],[1,2],[5,6],[4,8,2],[7,9,2],[1,3,2],[8,4]
+  ];
+
+  /* popularity (basket frequency) for cold-start fallback */
+  var POP = {};
+  PRODUCTS.forEach(function(p){ POP[p.id]=0; });
+  BASKETS.forEach(function(b){ b.forEach(function(id){ POP[id]++; }); });
+
+  /* item-item cosine similarity from co-occurrence */
+  function buildItemSim() {
+    var co = {}, cnt = {};
+    PRODUCTS.forEach(function(p){ cnt[p.id]=0; co[p.id]={}; });
+    BASKETS.forEach(function(b){
+      b.forEach(function(i){ cnt[i]++; });
+      for (var x=0;x<b.length;x++){
+        for (var y=0;y<b.length;y++){
+          if (b[x]!==b[y]) { co[b[x]][b[y]] = (co[b[x]][b[y]]||0)+1; }
+        }
+      }
+    });
+    var sim = {};
+    PRODUCTS.forEach(function(a){
+      sim[a.id]={};
+      PRODUCTS.forEach(function(b){
+        if (a.id===b.id) return;
+        var c = co[a.id][b.id]||0;
+        var denom = Math.sqrt((cnt[a.id]||1)*(cnt[b.id]||1));
+        sim[a.id][b.id] = denom ? c/denom : 0;
+      });
+    });
+    return sim;
+  }
+  var ITEMSIM = buildItemSim();
+
+  function vecOf(p){ return TAGS.map(function(t){ return p.tags.indexOf(t)>=0 ? 1 : 0; }); }
+  function cosine(a,b){
+    var dot=0,na=0,nb=0;
+    for (var i=0;i<a.length;i++){ dot+=a[i]*b[i]; na+=a[i]*a[i]; nb+=b[i]*b[i]; }
+    return (na&&nb) ? dot/(Math.sqrt(na)*Math.sqrt(nb)) : 0;
+  }
+
+  /* ============ STATE ============ */
+  var liked = {};      // id -> true
+  var mode = "content";
+
+  var catalogEl = document.getElementById("catalog");
+  var recsEl = document.getElementById("recs");
+  var likeCountEl = document.getElementById("likeCount");
+  var noteEl = document.getElementById("demoNote");
+  var modeDescEl = document.getElementById("modeDesc");
+
+  /* ============ RENDER CATALOG ============ */
+  function renderCatalog() {
+    catalogEl.innerHTML = "";
+    PRODUCTS.forEach(function(p){
+      var el = document.createElement("div");
+      el.className = "product" + (liked[p.id] ? " liked" : "");
+      el.setAttribute("role","button");
+      el.setAttribute("tabindex","0");
+      el.setAttribute("aria-pressed", liked[p.id] ? "true" : "false");
+      el.innerHTML =
+        '<span class="like-flag">♥</span>' +
+        '<span class="emoji">'+p.emoji+'</span>' +
+        '<div class="p-name">'+p.name+'</div>' +
+        '<div class="p-cat">'+CATAR[p.cat]+'</div>';
+      el.addEventListener("click", function(){ toggle(p.id); });
+      el.addEventListener("keydown", function(e){
+        if (e.key==="Enter"||e.key===" "){ e.preventDefault(); toggle(p.id); }
+      });
+      catalogEl.appendChild(el);
+    });
+  }
+
+  function toggle(id){
+    if (liked[id]) { delete liked[id]; } else { liked[id]=true; }
+    renderCatalog();
+    update();
+  }
+
+  function likedList(){ return PRODUCTS.filter(function(p){ return liked[p.id]; }); }
+
+  /* ============ RECOMMENDERS ============ */
+  function recommendContent(){
+    var L = likedList();
+    if (!L.length) return [];
+    // profile vector = mean of liked vectors
+    var prof = TAGS.map(function(){ return 0; });
+    L.forEach(function(p){ var v=vecOf(p); for (var i=0;i<v.length;i++) prof[i]+=v[i]; });
+    for (var i=0;i<prof.length;i++) prof[i]/=L.length;
+    var likedTags = {};
+    L.forEach(function(p){ p.tags.forEach(function(t){ likedTags[t]=(likedTags[t]||0)+1; }); });
+
+    return PRODUCTS.filter(function(p){ return !liked[p.id]; }).map(function(p){
+      var score = cosine(prof, vecOf(p));
+      // shared tags for explanation
+      var shared = p.tags.filter(function(t){ return likedTags[t]; });
+      shared.sort(function(a,b){ return (likedTags[b]||0)-(likedTags[a]||0); });
+      return { p:p, score:score, shared:shared };
+    }).filter(function(r){ return r.score>0; })
+      .sort(function(a,b){ return b.score-a.score; })
+      .slice(0,3);
+  }
+
+  function recommendCollab(){
+    var L = likedList();
+    if (!L.length) return [];
+    return PRODUCTS.filter(function(p){ return !liked[p.id]; }).map(function(p){
+      var score=0, best=null, bestv=0;
+      L.forEach(function(lp){
+        var s = (ITEMSIM[lp.id] && ITEMSIM[lp.id][p.id]) || 0;
+        score += s;
+        if (s>bestv){ bestv=s; best=lp; }
+      });
+      score = score / L.length;
+      return { p:p, score:score, best:best };
+    }).filter(function(r){ return r.score>0; })
+      .sort(function(a,b){ return b.score-a.score; })
+      .slice(0,3);
+  }
+
+  /* ============ RENDER RECS ============ */
+  function tagWord(t){ return TAGAR[t] || CATAR[t] || t; }
+
+  function update(){
+    var L = likedList();
+    likeCountEl.textContent = L.length;
+
+    if (!L.length){
+      // cold start
+      var pop = PRODUCTS.slice().sort(function(a,b){ return POP[b.id]-POP[a.id]; }).slice(0,3);
+      var html = '<div class="recs-head">ابدأ باختيار منتج</div>' +
+        '<div class="recs-sub">المحرّك يحتاج إشارة واحدة على الأقل ليتعلّم ذوقك.</div>' +
+        '<div class="rec-empty"><div class="big">🛒</div>لا توجد توصيات بعد — اختر منتجاً أو أكثر من المتجر.' +
+        '<div class="coldstart"><b>مشكلة البداية الباردة (Cold Start):</b> حين لا يملك النظام أي بيانات عنك، يلجأ إلى عرض <b>الأكثر رواجاً</b> مؤقتاً: ' +
+        pop.map(function(p){ return p.emoji+" "+p.name; }).join(" · ") +
+        '.</div></div>';
+      recsEl.innerHTML = html;
+      noteEl.innerHTML = mode==="content"
+        ? 'الأسلوب الحالي: <span class="en">Content-Based</span> — يقارن سمات المنتجات بعضها ببعض.'
+        : 'الأسلوب الحالي: <span class="en">Collaborative Filtering</span> — يعتمد على سلوك المستخدمين المتشابهين.';
+      return;
+    }
+
+    var recs = (mode==="content") ? recommendContent() : recommendCollab();
+
+    var head = (mode==="content")
+      ? { t:"منتجات تشبه ذوقك", s:"مرتّبة حسب تشابه السمات مع اختياراتك" }
+      : { t:"اشترى مستخدمون مثلك أيضاً", s:"مرتّبة حسب قوة الارتباط في سلّات الشراء" };
+
+    var out = '<div class="recs-head">'+head.t+'</div><div class="recs-sub">'+head.s+'</div>';
+
+    if (!recs.length){
+      out += '<div class="rec-empty"><div class="big">🤔</div>لا يوجد ارتباط كافٍ. جرّب اختيار منتجات من فئات مترابطة.</div>';
+    } else {
+      var maxScore = recs[0].score || 1;
+      recs.forEach(function(r, idx){
+        var pct = Math.round((r.score/maxScore)*100);
+        if (pct>99) pct=99; if (pct<8) pct=8;
+        var why;
+        if (mode==="content"){
+          var words = r.shared.slice(0,2).map(tagWord);
+          why = words.length
+            ? 'سمات مشتركة مع اختياراتك: <b>'+words.join("، ")+'</b>'
+            : 'ضمن اهتماماتك العامة';
+        } else {
+          why = r.best
+            ? 'كثيراً ما يُشترى مع <b>'+r.best.name+'</b>'
+            : 'شائع بين مستخدمين مشابهين';
+        }
+        out +=
+          '<div class="rec-item" style="animation-delay:'+(idx*0.08)+'s">' +
+            '<div class="rec-emoji">'+r.p.emoji+'</div>' +
+            '<div class="rec-body"><div class="rec-name">'+r.p.name+'</div>' +
+            '<div class="rec-why">'+why+'</div></div>' +
+            '<div class="rec-score"><div class="pct">'+pct+'%</div>' +
+            '<div class="rec-bar"><span style="width:0%"></span></div></div>' +
+          '</div>';
+      });
+    }
+    recsEl.innerHTML = out;
+    // animate score bars
+    requestAnimationFrame(function(){
+      var bars = recsEl.querySelectorAll(".rec-bar span");
+      var recsArr = (mode==="content") ? recommendContent() : recommendCollab();
+      var maxS = recsArr[0] ? (recsArr[0].score||1) : 1;
+      bars.forEach(function(b, i){
+        var pct = recsArr[i] ? Math.round((recsArr[i].score/maxS)*100) : 0;
+        if (pct>99) pct=99; if (pct<8) pct=8;
+        setTimeout(function(){ b.style.width = pct+"%"; }, 60);
+      });
+    });
+
+    noteEl.innerHTML = (mode==="content")
+      ? 'يحسب المحرّك تشابه جيب التمام (<span class="en">Cosine Similarity</span>) بين سمات المنتجات. هذا تبسيط تعليمي لما تفعله النماذج العميقة بأبعادٍ أكثر تعقيداً.'
+      : 'يبني المحرّك مصفوفة تشابه بين العناصر (<span class="en">Item-Item</span>) من سلوك شراء مُصطنَع. الأنظمة الحقيقية تتعلّم هذه العلاقات من مليارات التفاعلات.';
+  }
+
+  /* ============ MODE SWITCH ============ */
+  var modeBtns = document.querySelectorAll(".demo-mode-btn");
+  modeBtns.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      modeBtns.forEach(function(b){ b.classList.remove("active"); b.setAttribute("aria-pressed","false"); });
+      btn.classList.add("active"); btn.setAttribute("aria-pressed","true");
+      mode = btn.dataset.mode;
+      modeDescEl.innerHTML = (mode==="content")
+        ? 'يوصي بمنتجات تشبه ما أعجبك في <span class="en">سماتها</span> (الفئة، الخصائص) — أسلوب <span class="en">Content-Based Filtering</span>.'
+        : 'يوصي بما اشتراه <span class="en">مستخدمون مشابهون</span> لك بصرف النظر عن سمات المنتج — أسلوب <span class="en">Collaborative Filtering</span>.';
+      update();
+    });
+  });
+
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    liked = {}; renderCatalog(); update();
+  });
+
+  renderCatalog();
+  update();
+
+  /* ============ PIPELINE INTERACTION ============ */
+  var pipeStages = document.querySelectorAll(".pipe-stage");
+  pipeStages.forEach(function(st){
+    function activate(){ pipeStages.forEach(function(s){ s.classList.remove("active"); }); st.classList.add("active"); }
+    st.addEventListener("click", activate);
+    st.addEventListener("mouseenter", activate);
+    st.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); activate(); } });
+  });
+
+  /* ============ TIMELINE FILTER ============ */
+  var tlBtns = document.querySelectorAll(".tl-btn");
+  var tlItems = document.querySelectorAll(".tl-item");
+  tlBtns.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      tlBtns.forEach(function(b){ b.classList.remove("active"); b.setAttribute("aria-pressed","false"); });
+      btn.classList.add("active"); btn.setAttribute("aria-pressed","true");
+      var f = btn.dataset.filter;
+      tlItems.forEach(function(it){ it.style.display = (f==="all"||it.dataset.track===f) ? "" : "none"; });
+    });
+  });
+
+  /* ============ SMOOTH SCROLL NAV ============ */
+  document.querySelectorAll('.nav-links a, .hero-cta').forEach(function(link){
+    link.addEventListener("click", function(e){
+      var href = link.getAttribute("href");
+      if (!href || href.charAt(0)!=="#") return;
+      e.preventDefault();
+      var target = document.querySelector(href);
+      if (target){ window.scrollTo({ top: target.offsetTop-80, behavior:"smooth" }); }
+    });
+  });
+
+  /* ============ READING PROGRESS ============ */
+  var progress = document.getElementById("progress");
+  var toTop = document.getElementById("toTop");
+  function onScroll(){
+    var h = document.documentElement;
+    var scrolled = (h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+    progress.style.width = scrolled+"%";
+    if (h.scrollTop>600) toTop.classList.add("show"); else toTop.classList.remove("show");
+  }
+  window.addEventListener("scroll", onScroll, { passive:true });
+  onScroll();
+  toTop.addEventListener("click", function(){ window.scrollTo({ top:0, behavior:"smooth" }); });
+
+  /* ============ SCROLLSPY ============ */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-links a"));
+  var sections = navLinks.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+  if ("IntersectionObserver" in window){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          navLinks.forEach(function(a){ a.classList.remove("active"); });
+          var i = sections.indexOf(en.target);
+          if (i>=0 && navLinks[i]) navLinks[i].classList.add("active");
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    sections.forEach(function(s){ if (s) spy.observe(s); });
+  }
+
+  /* ============ SCROLL REVEAL ============ */
+  var reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window){
+    var rev = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          en.target.classList.add("in");
+          // trigger chart animations when their section reveals
+          if (en.target.querySelector("#growthChart")) animateGrowth();
+          if (en.target.querySelector("#metricsCard")) animateMetrics();
+          if (en.target.querySelector("#donutWrap")) animateDonut();
+          obs.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(function(r){ rev.observe(r); });
+  } else {
+    reveals.forEach(function(r){ r.classList.add("in"); });
+    animateGrowth(); animateMetrics(); animateDonut();
+  }
+
+  /* ============ CHART ANIMATIONS ============ */
+  function animateMetrics(){
+    document.querySelectorAll("#metricsCard .metric").forEach(function(m){
+      var fill = m.querySelector(".metric-fill");
+      var val = m.getAttribute("data-fill");
+      setTimeout(function(){ fill.style.width = val+"%"; }, 120);
+    });
+  }
+  function animateGrowth(){
+    document.querySelectorAll("#growthChart .growth-bar").forEach(function(b){
+      var h = b.getAttribute("data-h");
+      setTimeout(function(){ b.style.height = h+"%"; }, 120);
+    });
+  }
+  function animateDonut(){
+    var d = document.querySelector("#donutWrap .donut");
+    if (!d) return;
+    var v = d.getAttribute("data-val");
+    setTimeout(function(){ d.style.setProperty("--val", v); }, 120);
+  }
+})();
+</script>
+
+</body>
+</html>
